@@ -13,8 +13,4 @@ import { HomeComponent } from './home/home.component';
 })
 export class AppComponent {
   title = 'onepiece-tcg';
-
-  constructor() {
-    console.log('AppComponent initialized');
-  }
 }

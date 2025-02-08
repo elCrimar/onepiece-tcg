@@ -10,8 +10,4 @@ import { CardListComponent } from '../cards/card-list/card-list.component';
 })
 export class HomeComponent {
 
-  constructor() {
-    console.log('HomeComponent initialized');
-  }
-
 }
