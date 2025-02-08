@@ -1,0 +1,37 @@
+/* Estilo para la barra de búsqueda */
+.search-container {
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+/* Grid responsivo para las cartas */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  padding: 0 16px;
+}
+
+/* Estilo para cada carta */
+.card-item {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: transform 0.2s;
+  background-color: #fff;
+  text-align: center;
+  
+  &:hover {
+    transform: scale(1.02);
+  }
+
+  img {
+    width: 100%;
+    display: block;
+  }
+
+  h3 {
+    margin: 8px 0;
+    font-size: 1rem;
+  }
+}
