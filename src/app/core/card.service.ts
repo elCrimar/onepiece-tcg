@@ -51,4 +51,11 @@ export class CardService {
   getCardById(cardId: string): Observable<Card> {
     return this.apiService.get<any>(`cards/${cardId}`);
   }
+
+  // Obtener cartas por página
+  getCards(page: number, limit: number = 36): Observable<{ totalPages: number; data: Card[] }> {
+    return this.apiService.get<any>('cards', { page, limit }).pipe(
+      map(response => ({ totalPages: response.totalPages, data: response.data }))
+    );
+  }
 }
