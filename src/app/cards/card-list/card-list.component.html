@@ -1,20 +1,6 @@
-<!-- Barra de búsqueda -->
-<div class="search-container">
-  <input
-    type="text"
-    [(ngModel)]="searchTerm"
-    (ngModelChange)="onSearchChange()"
-    placeholder="Buscar cartas..."
-  />
-</div>
-
-<!-- Grid de cartas -->
+<p>Card List</p>
 <div class="cards-grid">
-  <div class="card-item" *ngFor="let card of filteredCards">
-    <!-- Al hacer clic, se navega al detalle de la carta -->
-    <a [routerLink]="['/cards', card.id]">
-      <img [src]="card.images" [alt]="card.name" />
-      <h3>{{ card.name }}</h3>
-    </a>
+  <div class="card-item" *ngFor="let card of cards">
+    <img [src]="card.images.large" [alt]="card.name" />
   </div>
 </div>

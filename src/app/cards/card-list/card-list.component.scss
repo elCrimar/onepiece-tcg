@@ -1,37 +1,46 @@
-/* Estilo para la barra de búsqueda */
-.search-container {
-  margin-bottom: 16px;
-  text-align: center;
-}
-
-/* Grid responsivo para las cartas */
 .cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(6, 1fr);
   gap: 16px;
-  padding: 0 16px;
+  padding: 16px;
+  justify-content: center;
 }
 
-/* Estilo para cada carta */
 .card-item {
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  width: 100%;
   overflow: hidden;
-  transition: transform 0.2s;
   background-color: #fff;
-  text-align: center;
-  
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+
   &:hover {
-    transform: scale(1.02);
+    transform: scale(1.05);
+    cursor: pointer;
   }
 
   img {
     width: 100%;
-    display: block;
+    height: 100%;
+    object-fit: cover;
   }
+}
 
-  h3 {
-    margin: 8px 0;
-    font-size: 1rem;
+/* Responsive */
+@media (max-width: 1024px) {
+  .cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .cards-grid {
+    grid-template-columns: repeat(1, 1fr);
   }
 }
