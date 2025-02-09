@@ -1,7 +1,7 @@
 <p>Card List</p>
 <div class="cards-grid">
   <div class="card-item" *ngFor="let card of cards">
-    <img [src]="card.images.large" [alt]="card.name" />
+    <img [src]="card.images.large" [alt]="card.name" loading="lazy" />
   </div>
 </div>
 <!-- Elemento disparador para el IntersectionObserver -->
