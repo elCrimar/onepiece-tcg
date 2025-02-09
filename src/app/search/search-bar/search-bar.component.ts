@@ -28,7 +28,6 @@ export class SearchBarComponent {
     @Output() search: EventEmitter<any> = new EventEmitter();
 
     onSearch(): void {
-        // Se emite el filtro trigger sin conversión, ya es string
         this.search.emit({
             name: this.searchTerm,
             ...this.filters
