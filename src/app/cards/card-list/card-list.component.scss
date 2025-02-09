@@ -27,6 +27,13 @@
   }
 }
 
+.no-cards-message {
+    text-align: center;
+    font-size: 2.2rem;
+    color: #bababa;
+    margin: 40px 50px;
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
   .cards-grid {

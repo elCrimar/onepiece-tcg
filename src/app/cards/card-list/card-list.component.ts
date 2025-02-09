@@ -2,11 +2,12 @@ import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angula
 import { CommonModule } from '@angular/common';
 import { CardService } from '../../core/card.service';
 import { Card } from '../../models/card';
+import { SearchBarComponent } from '../../search/search-bar/search-bar.component';
 
 @Component({
   selector: 'app-card-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, SearchBarComponent],
   templateUrl: './card-list.component.html',
   styleUrls: ['./card-list.component.scss']
 })
@@ -19,6 +20,10 @@ export class CardListComponent implements OnInit, AfterViewInit {
 
   currentExpansionIndex = 0;
   expansionCodes!: string[];
+  
+  // Agregamos las propiedades para el modo búsqueda
+  searchMode: boolean = false;
+  searchQuery: string = '';
 
   @ViewChild('scrollTrigger') scrollTrigger!: ElementRef;
   private intersectionObserver!: IntersectionObserver;
@@ -48,7 +53,11 @@ export class CardListComponent implements OnInit, AfterViewInit {
       this.intersectionObserver = new IntersectionObserver(
         (entries) => {
           if (entries[0].isIntersecting) {
-            this.loadCards();
+            if (this.searchMode) {
+              this.loadSearchCards();
+            } else {
+              this.loadCards();
+            }
           }
         },
         { root: null, threshold: 0.1 }
@@ -94,37 +103,48 @@ export class CardListComponent implements OnInit, AfterViewInit {
     });
   }
 
-  // private sortCards(cards: Card[]): Card[] {
-  //   const parseCardId = (id: string) => {
-  //     // Se espera formato como "OP01-121" o "OP01-121_p1"
-  //     const [prefix, rest] = id.split('-'); // Ej.: prefix = "OP01", rest = "121" o "121_p1"
-  //     let cardNumberStr = '';
-  //     let variantStr = '0';
-  //     if (rest.includes('_p')) {
-  //       [cardNumberStr, variantStr] = rest.split('_p');
-  //     } else {
-  //       cardNumberStr = rest;
-  //     }
-  //     return {
-  //       prefix, // Ej.: "OP01"
-  //       cardNumber: parseInt(cardNumberStr, 10),  // Ej.: 121
-  //       variant: parseInt(variantStr, 10)         // 0 si no hay variante, 1 si es _p1, etc.
-  //     };
-  //   };
+  // Método para cargar cartas de búsqueda paginadas
+  loadSearchCards(): void {
+    if (this.loading) return;
+    if (this.currentPage > this.totalPages) return; // No hay más páginas en la búsqueda
 
-  //   return cards.sort((a, b) => {
-  //     const aId = parseCardId(a.id);
-  //     const bId = parseCardId(b.id);
-  //     // Primero por el código de expansión
-  //     if (aId.prefix !== bId.prefix) {
-  //       return aId.prefix < bId.prefix ? -1 : 1;
-  //     }
-  //     // Luego por el número de carta
-  //     if (aId.cardNumber !== bId.cardNumber) {
-  //       return aId.cardNumber - bId.cardNumber;
-  //     }
-  //     // Por último, por la variante (0 antes que 1, etc.)
-  //     return aId.variant - bId.variant;
-  //   });
-  // }
+    this.loading = true;
+    this.cardService.searchCards(this.searchQuery, this.currentPage, this.limit).subscribe({
+      next: res => {
+        this.totalPages = res.totalPages;
+        // Se concatenan los resultados de la búsqueda
+        this.cards = this.cards.concat(res.data);
+        this.currentPage++;
+        this.loading = false;
+        if (this.intersectionObserver && this.scrollTrigger) {
+          this.intersectionObserver.unobserve(this.scrollTrigger.nativeElement);
+          this.intersectionObserver.observe(this.scrollTrigger.nativeElement);
+        }
+      },
+      error: err => {
+        console.error('Error al buscar cartas:', err);
+        this.loading = false;
+      }
+    });
+  }
+
+  // Método para iniciar la búsqueda o restablecer la lista
+  onSearch(query: string): void {
+    if (!query) {
+      // Se desactiva el modo búsqueda y se restablece la lista original
+      this.searchMode = false;
+      this.cards = [];
+      this.currentExpansionIndex = 0;
+      this.currentPage = 1;
+      this.loadCards();
+      return;
+    }
+
+    // Activa el modo búsqueda y reinicia la paginación para consultas
+    this.searchMode = true;
+    this.searchQuery = query;
+    this.cards = [];
+    this.currentPage = 1;
+    this.loadSearchCards();
+  }
 }

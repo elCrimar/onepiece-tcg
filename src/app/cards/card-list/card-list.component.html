@@ -1,5 +1,10 @@
-<p>Card List</p>
-<div class="cards-grid">
+<app-search-bar (search)="onSearch($event)"></app-search-bar>
+
+<div *ngIf="!loading && cards.length === 0" class="no-cards-message">
+  No se encontró ninguna carta
+</div>
+
+<div class="cards-grid" *ngIf="cards.length > 0">
   <div class="card-item" *ngFor="let card of cards">
     <img [src]="card.images.large" [alt]="card.name" loading="lazy" />
   </div>
