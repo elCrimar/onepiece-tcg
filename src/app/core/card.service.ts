@@ -22,7 +22,8 @@ export class CardService {
     OP05: "OP05-",
     OP06: "OP06-",
     OP07: "OP07-",
-    OP08: "OP08-"
+    OP08: "OP08-",
+    OP09: "OP09-"
   };
 
   public ebCode = "EB01-";
