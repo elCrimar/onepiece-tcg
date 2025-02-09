@@ -10,10 +10,43 @@ import { FormsModule } from '@angular/forms';
     styleUrls: ['./search-bar.component.scss']
 })
 export class SearchBarComponent {
+    // Campo principal para búsqueda por nombre
     searchTerm: string = '';
-    @Output() search: EventEmitter<string> = new EventEmitter();
+    
+    // Filtros adicionales
+    filters = {
+        rarity: '',
+        type: '',
+        cost: '',
+        power: '',
+        counter: '',
+        color: '',
+        family: '',
+        trigger: ''
+    };
+
+    @Output() search: EventEmitter<any> = new EventEmitter();
 
     onSearch(): void {
-        this.search.emit(this.searchTerm);
+        // Se emite el filtro trigger sin conversión, ya es string
+        this.search.emit({
+            name: this.searchTerm,
+            ...this.filters
+        });
+    }
+
+    resetFilters(): void {
+        this.searchTerm = '';
+        this.filters = {
+            rarity: '',
+            type: '',
+            cost: '',
+            power: '',
+            counter: '',
+            color: '',
+            family: '',
+            trigger: ''
+        };
+        this.onSearch();
     }
 }

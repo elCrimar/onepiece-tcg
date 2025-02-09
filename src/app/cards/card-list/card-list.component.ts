@@ -21,9 +21,9 @@ export class CardListComponent implements OnInit, AfterViewInit {
   currentExpansionIndex = 0;
   expansionCodes!: string[];
   
-  // Agregamos las propiedades para el modo búsqueda
+  // Modo búsqueda y filtros
   searchMode: boolean = false;
-  searchQuery: string = '';
+  searchFilters: any = {};
 
   @ViewChild('scrollTrigger') scrollTrigger!: ElementRef;
   private intersectionObserver!: IntersectionObserver;
@@ -31,7 +31,6 @@ export class CardListComponent implements OnInit, AfterViewInit {
   constructor(private cardService: CardService) {}
 
   ngOnInit(): void {
-    // Inicializamos expansionCodes una vez que ya tenemos cardService
     this.expansionCodes = [
       this.cardService.opCodes.OP01,
       this.cardService.opCodes.OP02,
@@ -68,7 +67,7 @@ export class CardListComponent implements OnInit, AfterViewInit {
 
   loadCards(): void {
     if (this.loading) return;
-    if (this.currentExpansionIndex >= this.expansionCodes.length) return; // No hay más expansiones
+    if (this.currentExpansionIndex >= this.expansionCodes.length) return;
 
     this.loading = true;
     const codePrefix = this.expansionCodes[this.currentExpansionIndex];
@@ -76,18 +75,13 @@ export class CardListComponent implements OnInit, AfterViewInit {
     this.cardService.getCardsByCode(codePrefix, this.currentPage, this.limit).subscribe({
       next: res => {
         this.totalPages = res.totalPages;
-
-        // Si no hay cartas en esta página o se ha superado la paginación para esta expansión
         if (res.data.length === 0 || this.currentPage > this.totalPages) {
-          // Cambiar al siguiente código de expansión
           this.currentExpansionIndex++;
           this.currentPage = 1;
           this.loading = false;
           this.loadCards();
           return;
         }
-
-        // Concatenamos las cartas nuevas y aplicamos sortCards
         this.cards = this.cards.concat(res.data);
         this.currentPage++;
         this.loading = false;
@@ -103,18 +97,21 @@ export class CardListComponent implements OnInit, AfterViewInit {
     });
   }
 
-  // Método para cargar cartas de búsqueda paginadas
   loadSearchCards(): void {
     if (this.loading) return;
-    if (this.currentPage > this.totalPages) return; // No hay más páginas en la búsqueda
+    if (this.currentPage > this.totalPages) return;
 
     this.loading = true;
-    this.cardService.searchCards(this.searchQuery, this.currentPage, this.limit).subscribe({
+    this.cardService.searchCards(this.searchFilters, this.currentPage, this.limit).subscribe({
       next: res => {
         this.totalPages = res.totalPages;
-        // Se concatenan los resultados de la búsqueda
-        this.cards = this.cards.concat(res.data);
-        this.currentPage++;
+        // Si no se encontraron cartas y es la primera página, se mostrará el mensaje
+        if(this.currentPage === 1 && res.data.length === 0){
+          this.cards = [];
+        } else {
+          this.cards = this.cards.concat(res.data);
+          this.currentPage++;
+        }
         this.loading = false;
         if (this.intersectionObserver && this.scrollTrigger) {
           this.intersectionObserver.unobserve(this.scrollTrigger.nativeElement);
@@ -128,9 +125,9 @@ export class CardListComponent implements OnInit, AfterViewInit {
     });
   }
 
-  // Método para iniciar la búsqueda o restablecer la lista
-  onSearch(query: string): void {
-    if (!query) {
+  // Ahora onSearch recibe un objeto con nombre y filtros
+  onSearch(searchData: any): void {
+    if (!searchData.name && !Object.values(searchData).some(val => val)) {
       // Se desactiva el modo búsqueda y se restablece la lista original
       this.searchMode = false;
       this.cards = [];
@@ -140,9 +137,8 @@ export class CardListComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    // Activa el modo búsqueda y reinicia la paginación para consultas
     this.searchMode = true;
-    this.searchQuery = query;
+    this.searchFilters = { ...searchData };
     this.cards = [];
     this.currentPage = 1;
     this.loadSearchCards();

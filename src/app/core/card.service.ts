@@ -66,9 +66,9 @@ export class CardService {
     );
   }
 
-  // Buscar cartas por nombre con paginación
-  searchCards(name: string, page: number, limit: number): Observable<{ totalPages: number; data: Card[] }> {
-    return this.apiService.get<any>('cards', { name, page, limit }).pipe(
+  // Buscar cartas por nombre con filtros y paginación
+  searchCards(filters: any, page: number, limit: number): Observable<{ totalPages: number; data: Card[] }> {
+    return this.apiService.get<any>('cards', { ...filters, page, limit }).pipe(
       map(response => response)
     );
   }

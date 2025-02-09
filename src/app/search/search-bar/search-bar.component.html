@@ -2,3 +2,132 @@
     <input type="text" [(ngModel)]="searchTerm" placeholder="Buscar carta..." (keyup.enter)="onSearch()" />
     <button (click)="onSearch()">Buscar</button>
 </div>
+
+<div class="filters">
+  <!-- Rarity -->
+  <div class="filter">
+    <label>Rarity:</label>
+    <select [(ngModel)]="filters.rarity">
+      <option value="">Todas</option>
+      <option value="C">Common</option>
+      <option value="UC">Uncommon</option>
+      <option value="R">Rare</option>
+      <option value="L">Leader</option>
+      <option value="SR">Super Rare</option>
+      <option value="SEC">Secret Rare</option>
+      <option value="SP">Special Rare</option>
+    </select>
+  </div>
+
+  <!-- Type -->
+  <div class="filter">
+    <label>Type:</label>
+    <select [(ngModel)]="filters.type">
+      <option value="">Todos</option>
+      <option value="LEADER">LEADER</option>
+      <option value="CHARACTER">CHARACTER</option>
+      <option value="EVENT">EVENT</option>
+    </select>
+  </div>
+
+  <!-- Cost -->
+  <div class="filter">
+    <label>Cost:</label>
+    <input type="number" min="1" max="10" [(ngModel)]="filters.cost" placeholder="1-10" />
+  </div>
+
+  <!-- Power -->
+  <div class="filter">
+    <label>Power:</label>
+    <input type="number" min="0" max="12000" step="1000" [(ngModel)]="filters.power" placeholder="0-12000" />
+  </div>
+
+  <!-- Counter -->
+  <div class="filter">
+    <label>Counter:</label>
+    <select [(ngModel)]="filters.counter">
+      <option value="">Sin counter</option>
+      <option value="1000">1000</option>
+      <option value="2000">2000</option>
+    </select>
+  </div>
+
+  <!-- Color -->
+  <div class="filter">
+    <label>Color:</label>
+    <select [(ngModel)]="filters.color">
+      <option value="">Todos</option>
+      <option value="red">Red</option>
+      <option value="black">Black</option>
+      <option value="blue">Blue</option>
+      <option value="green">Green</option>
+      <option value="purple">Purple</option>
+      <option value="yellow">Yellow</option>
+    </select>
+  </div>
+
+  <!-- Familia -->
+  <div class="filter">
+    <label>Familia:</label>
+    <select [(ngModel)]="filters.family">
+      <option value="">Todos</option>
+      <optgroup label="Combinadas">
+        <option value="Animal/Alabasta">Animal/Alabasta</option>
+        <option value="Animal/Straw Hat Crew">Animal/Straw Hat Crew</option>
+        <option value="Donquixote Pirates/Punk Hazard">Donquixote Pirates/Punk Hazard</option>
+        <option value="FILM/Jellyfish Pirates">FILM/Jellyfish Pirates</option>
+        <option value="FILM/Minks/Heart Pirates">FILM/Minks/Heart Pirates</option>
+        <option value="FILM/Navy">FILM/Navy</option>
+        <option value="FILM/Supernovas/Barto Club">FILM/Supernovas/Barto Club</option>
+        <option value="FILM/Supernovas/Heart Pirates">FILM/Supernovas/Heart Pirates</option>
+        <option value="FILM/Straw Hat Crew">FILM/Straw Hat Crew</option>
+        <option value="FILM/The Four Emperors/Red-Haired Pirates">FILM/The Four Emperors/Red-Haired Pirates</option>
+        <option value="Fish-Man/Straw Hat Crew">Fish-Man/Straw Hat Crew</option>
+        <option value="Fish-Man/The Seven Warlords of the Sea/The Sun Pirates">Fish-Man/The Seven Warlords of the Sea/The Sun Pirates</option>
+        <option value="Navy/Donquixote Pirates/Punk Hazard">Navy/Donquixote Pirates/Punk Hazard</option>
+        <option value="Supernovas/Heart Pirates">Supernovas/Heart Pirates</option>
+        <option value="Supernovas/Kid Pirates">Supernovas/Kid Pirates</option>
+        <option value="Supernovas/Straw Hat Crew">Supernovas/Straw Hat Crew</option>
+        <option value="The Four Emperors/Animal Kingdom Pirates">The Four Emperors/Animal Kingdom Pirates</option>
+        <option value="The Seven Warlords of the Sea/Baroque Works">The Seven Warlords of the Sea/Baroque Works</option>
+        <option value="The Seven Warlords of the Sea/Donquixote Pirates">The Seven Warlords of the Sea/Donquixote Pirates</option>
+      </optgroup>
+      <optgroup label="Individuales">
+        <option value="Alabasta">Alabasta</option>
+        <option value="Animal">Animal</option>
+        <option value="Animal Kingdom Pirates">Animal Kingdom Pirates</option>
+        <option value="Barto Club">Barto Club</option>
+        <option value="Baroque Works">Baroque Works</option>
+        <option value="Donquixote Doflamingo">Donquixote Doflamingo</option>
+        <option value="FILM">FILM</option>
+        <option value="Fish-Man">Fish-Man</option>
+        <option value="Heart Pirates">Heart Pirates</option>
+        <option value="Jellyfish Pirates">Jellyfish Pirates</option>
+        <option value="Kid Pirates">Kid Pirates</option>
+        <option value="Minks">Minks</option>
+        <option value="Navy">Navy</option>
+        <option value="Red-Haired Pirates">Red-Haired Pirates</option>
+        <option value="Straw Hat Crew">Straw Hat Crew</option>
+        <option value="Supernovas">Supernovas</option>
+        <option value="The Four Emperors">The Four Emperors</option>
+        <option value="The Seven Warlords of the Sea">The Seven Warlords of the Sea</option>
+        <option value="The Sun Pirates">The Sun Pirates</option>
+        <option value="The Vinsmoke Family">The Vinsmoke Family</option>
+        <option value="Whitebeard Pirates">Whitebeard Pirates</option>
+      </optgroup>
+    </select>
+  </div>
+
+  <!-- Trigger -->
+  <div class="filter">
+    <label>Trigger:</label>
+    <select [(ngModel)]="filters.trigger">
+      <option value="">Todos</option>
+      <option value="trigger">Sí</option>
+    </select>
+  </div>
+</div>
+
+<div class="reset-container">
+  <button (click)="resetFilters()">Reset Filters</button>
+</div>

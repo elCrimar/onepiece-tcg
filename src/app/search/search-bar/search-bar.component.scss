@@ -33,3 +33,48 @@
         cursor: pointer;
     }
 }
+
+/* Estilos para los filtros en forma horizontal */
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin: 10px 0;
+}
+
+.filter {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.9rem;
+}
+
+.filter select {
+    cursor: pointer !important;
+    border: 1px solid #e3e3e3;
+    border-radius: 8px;
+    padding: 0.5rem;
+}
+
+.filter input {
+    border: 1px solid #e3e3e3;
+    border-radius: 8px;
+    padding: 0.5rem;
+}
+
+.filter label {
+    margin-bottom: 0.5rem;
+}
+
+.reset-container {
+    margin-top: 10px;
+    text-align: right;
+
+    button {
+        padding: 0.5rem 1rem;
+        background-color: #888;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+}
