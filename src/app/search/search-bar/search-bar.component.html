@@ -33,7 +33,7 @@
   <!-- Cost -->
   <div class="filter">
     <label>Cost:</label>
-    <input type="number" min="1" max="10" [(ngModel)]="filters.cost" placeholder="1-10" />
+    <input type="number" min="0" max="10" [(ngModel)]="filters.cost" placeholder="0-10" />
   </div>
 
   <!-- Power -->
@@ -63,6 +63,15 @@
       <option value="green">Green</option>
       <option value="purple">Purple</option>
       <option value="yellow">Yellow</option>
+    </select>
+  </div>
+  
+  <!-- Trigger -->
+  <div class="filter">
+    <label>Trigger:</label>
+    <select [(ngModel)]="filters.trigger">
+      <option value="">Todos</option>
+      <option value="trigger">Sí</option>
     </select>
   </div>
 
@@ -115,15 +124,6 @@
         <option value="The Vinsmoke Family">The Vinsmoke Family</option>
         <option value="Whitebeard Pirates">Whitebeard Pirates</option>
       </optgroup>
-    </select>
-  </div>
-
-  <!-- Trigger -->
-  <div class="filter">
-    <label>Trigger:</label>
-    <select [(ngModel)]="filters.trigger">
-      <option value="">Todos</option>
-      <option value="trigger">Sí</option>
     </select>
   </div>
 </div>
