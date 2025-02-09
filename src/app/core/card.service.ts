@@ -10,6 +10,46 @@ import { Card } from '../../app/models/card';
 export class CardService {
   constructor(private apiService: ApiService) {}
 
+  /**
+   * Variables para el filtro por code:
+   * Aquí indicas el prefijo para cada expansión.
+   */
+  public opCodes = {
+    OP01: "OP01-",
+    OP02: "OP02-",
+    OP03: "OP03-",
+    OP04: "OP04-",
+    OP05: "OP05-",
+    OP06: "OP06-",
+    OP07: "OP07-",
+    OP08: "OP08-"
+  };
+
+  public ebCode = "EB01-";
+
+  public stCodes = {
+    ST01: "ST01-",
+    ST02: "ST02-",
+    ST03: "ST03-",
+    ST04: "ST04-",
+    ST05: "ST05-",
+    ST06: "ST06-",
+    ST07: "ST07-",
+    ST08: "ST08-",
+    ST09: "ST09-",
+    ST10: "ST10-",
+    ST11: "ST11-",
+    ST12: "ST12-",
+    ST13: "ST13-",
+    ST14: "ST14-",
+    ST15: "ST15-",
+    ST16: "ST16-",
+    ST17: "ST17-",
+    ST18: "ST18-",
+    ST19: "ST19-",
+    ST20: "ST20-"
+  };
+
   // Obtener todas las cartas (todas las páginas)
   getAllCards(): Observable<Card[]> {
     const limit = 100; // Máximo permitido por la API
@@ -56,6 +96,21 @@ export class CardService {
   getCards(page: number, limit: number): Observable<{ totalPages: number; data: Card[] }> {
     return this.apiService.get<any>('cards', { page, limit }).pipe(
       map(response => ({ totalPages: response.totalPages, data: response.data }))
+    );
+  }
+
+  /**
+   * Método para obtener cartas mediante el atributo code.
+   * @param codePrefix El prefijo del code (por ejemplo, "OP01-")
+   * @param page Número de página
+   * @param limit Número máximo de cartas por página
+   */
+  getCardsByCode(codePrefix: string, page: number, limit: number): Observable<{ totalPages: number; data: Card[] }> {
+    return this.apiService.get<any>('cards', { code: codePrefix, page, limit }).pipe(
+      map(response => ({
+        totalPages: response.totalPages,
+        data: response.data
+      }))
     );
   }
 }
