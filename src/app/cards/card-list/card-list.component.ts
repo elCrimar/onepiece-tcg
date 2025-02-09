@@ -36,6 +36,7 @@ export class CardListComponent implements OnInit, AfterViewInit {
       this.cardService.opCodes.OP06,
       this.cardService.opCodes.OP07,
       this.cardService.opCodes.OP08,
+      this.cardService.opCodes.OP09,
       this.cardService.ebCode,
       ...Object.values(this.cardService.stCodes)
     ];
@@ -43,15 +44,15 @@ export class CardListComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.intersectionObserver = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          this.loadCards();
-        }
-      },
-      { root: null, threshold: 0.1 }
-    );
-    if (this.scrollTrigger) {
+    if (typeof window !== 'undefined' && 'IntersectionObserver' in window && this.scrollTrigger) {
+      this.intersectionObserver = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            this.loadCards();
+          }
+        },
+        { root: null, threshold: 0.1 }
+      );
       this.intersectionObserver.observe(this.scrollTrigger.nativeElement);
     }
   }
