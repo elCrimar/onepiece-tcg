@@ -15,41 +15,59 @@
       </div>
       <div class="right-panel">
         <div class="card-info">
-          <div class="info-row" *ngIf="card?.cost !== undefined">
-            <span class="label">{{ card?.type === 'LEADER' ? 'Vidas' : 'Coste' }}:</span>
-            <span>{{ card?.cost }}</span>
+          <!-- Primera fila: Coste y Atributo -->
+          <div class="info-grid">
+            <div class="info-row" *ngIf="card?.cost !== undefined">
+              <span class="label">{{ card?.type === 'LEADER' ? 'Vidas' : 'Coste' }}:</span>
+              <span>{{ card?.cost }}</span>
+            </div>
+            
+            <div class="info-row">
+              <span class="label">Atributo:</span>
+              <span *ngIf="!card?.attribute?.image || card?.attribute?.image?.endsWith('undefined')">-</span>
+              <img *ngIf="card?.attribute?.image && !card?.attribute?.image?.endsWith('undefined')" 
+                   [src]="card?.attribute?.image" 
+                   alt="Attribute Image">
+            </div>
           </div>
 
-          <div class="info-row" *ngIf="card?.power">
-            <span class="label">Poder:</span>
-            <span>{{ card?.power }}</span>
+          <!-- Segunda fila: Poder y Counter -->
+          <div class="info-grid">
+            <div class="info-row" *ngIf="card?.power">
+              <span class="label">Poder:</span>
+              <span>{{ card?.power }}</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Counter:</span>
+              <span>{{ card?.counter }}</span>
+            </div>
           </div>
 
-          <div class="info-row">
-            <span class="label">Counter:</span>
-            <span>{{ card?.counter }}</span>
-          </div>
-
+          <!-- Color -->
           <div class="info-row">
             <span class="label">Color:</span>
             <span>{{ card?.color }}</span>
           </div>
 
+          <!-- Familia -->
           <div class="info-row">
             <span class="label">Familia:</span>
             <span>{{ card?.family }}</span>
           </div>
 
-          <div class="info-row">
+          <!-- Habilidad -->
+          <div class="info-row ability-row">
             <span class="label">Habilidad:</span>
             <span [innerHTML]="formatAbility(card?.ability)"></span>
           </div>
 
-          <div class="info-row">
+          <!-- Trigger -->
+            <div class="info-row" *ngIf="card?.trigger">
             <span class="label">Trigger:</span>
             <span [innerHTML]="formatTrigger(card?.trigger)"></span>
-          </div>
+            </div>
 
+          <!-- Set -->
           <div class="info-row" *ngIf="card?.set?.name">
             <span class="label">Set:</span>
             <span>{{ card?.set?.name }}</span>

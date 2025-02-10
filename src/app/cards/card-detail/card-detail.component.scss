@@ -85,17 +85,38 @@
 .card-info {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 1.2rem;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
 }
 
 .info-row {
   display: flex;
   gap: 1rem;
+  align-items: center;
 
   .label {
     min-width: 100px;
     font-weight: bold;
     color: #b2b2b2;
+  }
+
+  img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+  }
+}
+
+.ability-row {
+  margin-top: 0.5rem;
+  
+  span:last-child {
+    flex: 1;
   }
 }
 
