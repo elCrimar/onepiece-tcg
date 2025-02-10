@@ -65,16 +65,18 @@
     margin-bottom: 0.5rem;
 }
 
-.reset-container {
-    margin-top: 10px;
-    text-align: right;
+.filter-with-reset {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
 
-    button {
-        padding: 0.5rem 1rem;
-        background-color: #888;
-        color: #fff;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-    }
+  .reset-button {
+    padding: 0.5rem 1rem;
+    background-color: #737373;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    height: 37px;
+  }
 }

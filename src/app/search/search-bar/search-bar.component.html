@@ -76,59 +76,58 @@
     </select>
   </div>
 
-  <!-- Familia -->
-  <div class="filter">
-    <label>Familia:</label>
-    <select [(ngModel)]="filters.family">
-      <option value="">Todos</option>
-      <optgroup label="Combinadas">
-        <option value="Animal/Alabasta">Animal/Alabasta</option>
-        <option value="Animal/Straw Hat Crew">Animal/Straw Hat Crew</option>
-        <option value="Donquixote Pirates/Punk Hazard">Donquixote Pirates/Punk Hazard</option>
-        <option value="FILM/Jellyfish Pirates">FILM/Jellyfish Pirates</option>
-        <option value="FILM/Minks/Heart Pirates">FILM/Minks/Heart Pirates</option>
-        <option value="FILM/Navy">FILM/Navy</option>
-        <option value="FILM/Supernovas/Barto Club">FILM/Supernovas/Barto Club</option>
-        <option value="FILM/Supernovas/Heart Pirates">FILM/Supernovas/Heart Pirates</option>
-        <option value="FILM/Straw Hat Crew">FILM/Straw Hat Crew</option>
-        <option value="FILM/The Four Emperors/Red-Haired Pirates">FILM/The Four Emperors/Red-Haired Pirates</option>
-        <option value="Fish-Man/Straw Hat Crew">Fish-Man/Straw Hat Crew</option>
-        <option value="Fish-Man/The Seven Warlords of the Sea/The Sun Pirates">Fish-Man/The Seven Warlords of the Sea/The Sun Pirates</option>
-        <option value="Navy/Donquixote Pirates/Punk Hazard">Navy/Donquixote Pirates/Punk Hazard</option>
-        <option value="Supernovas/Heart Pirates">Supernovas/Heart Pirates</option>
-        <option value="Supernovas/Kid Pirates">Supernovas/Kid Pirates</option>
-        <option value="Supernovas/Straw Hat Crew">Supernovas/Straw Hat Crew</option>
-        <option value="The Four Emperors/Animal Kingdom Pirates">The Four Emperors/Animal Kingdom Pirates</option>
-        <option value="The Seven Warlords of the Sea/Baroque Works">The Seven Warlords of the Sea/Baroque Works</option>
-        <option value="The Seven Warlords of the Sea/Donquixote Pirates">The Seven Warlords of the Sea/Donquixote Pirates</option>
-      </optgroup>
-      <optgroup label="Individuales">
-        <option value="Alabasta">Alabasta</option>
-        <option value="Animal">Animal</option>
-        <option value="Animal Kingdom Pirates">Animal Kingdom Pirates</option>
-        <option value="Barto Club">Barto Club</option>
-        <option value="Baroque Works">Baroque Works</option>
-        <option value="Donquixote Doflamingo">Donquixote Doflamingo</option>
-        <option value="FILM">FILM</option>
-        <option value="Fish-Man">Fish-Man</option>
-        <option value="Heart Pirates">Heart Pirates</option>
-        <option value="Jellyfish Pirates">Jellyfish Pirates</option>
-        <option value="Kid Pirates">Kid Pirates</option>
-        <option value="Minks">Minks</option>
-        <option value="Navy">Navy</option>
-        <option value="Red-Haired Pirates">Red-Haired Pirates</option>
-        <option value="Straw Hat Crew">Straw Hat Crew</option>
-        <option value="Supernovas">Supernovas</option>
-        <option value="The Four Emperors">The Four Emperors</option>
-        <option value="The Seven Warlords of the Sea">The Seven Warlords of the Sea</option>
-        <option value="The Sun Pirates">The Sun Pirates</option>
-        <option value="The Vinsmoke Family">The Vinsmoke Family</option>
-        <option value="Whitebeard Pirates">Whitebeard Pirates</option>
-      </optgroup>
-    </select>
+  <!-- Familia y Reset -->
+  <div class="filter-with-reset">
+    <div class="filter">
+      <label>Familia:</label>
+      <select [(ngModel)]="filters.family">
+        <option value="">Todos</option>
+        <optgroup label="Combinadas">
+          <option value="Animal/Alabasta">Animal/Alabasta</option>
+          <option value="Animal/Straw Hat Crew">Animal/Straw Hat Crew</option>
+          <option value="Donquixote Pirates/Punk Hazard">Donquixote Pirates/Punk Hazard</option>
+          <option value="FILM/Jellyfish Pirates">FILM/Jellyfish Pirates</option>
+          <option value="FILM/Minks/Heart Pirates">FILM/Minks/Heart Pirates</option>
+          <option value="FILM/Navy">FILM/Navy</option>
+          <option value="FILM/Supernovas/Barto Club">FILM/Supernovas/Barto Club</option>
+          <option value="FILM/Supernovas/Heart Pirates">FILM/Supernovas/Heart Pirates</option>
+          <option value="FILM/Straw Hat Crew">FILM/Straw Hat Crew</option>
+          <option value="FILM/The Four Emperors/Red-Haired Pirates">FILM/The Four Emperors/Red-Haired Pirates</option>
+          <option value="Fish-Man/Straw Hat Crew">Fish-Man/Straw Hat Crew</option>
+          <option value="Fish-Man/The Seven Warlords of the Sea/The Sun Pirates">Fish-Man/The Seven Warlords of the Sea/The Sun Pirates</option>
+          <option value="Navy/Donquixote Pirates/Punk Hazard">Navy/Donquixote Pirates/Punk Hazard</option>
+          <option value="Supernovas/Heart Pirates">Supernovas/Heart Pirates</option>
+          <option value="Supernovas/Kid Pirates">Supernovas/Kid Pirates</option>
+          <option value="Supernovas/Straw Hat Crew">Supernovas/Straw Hat Crew</option>
+          <option value="The Four Emperors/Animal Kingdom Pirates">The Four Emperors/Animal Kingdom Pirates</option>
+          <option value="The Seven Warlords of the Sea/Baroque Works">The Seven Warlords of the Sea/Baroque Works</option>
+          <option value="The Seven Warlords of the Sea/Donquixote Pirates">The Seven Warlords of the Sea/Donquixote Pirates</option>
+        </optgroup>
+        <optgroup label="Individuales">
+          <option value="Alabasta">Alabasta</option>
+          <option value="Animal">Animal</option>
+          <option value="Animal Kingdom Pirates">Animal Kingdom Pirates</option>
+          <option value="Barto Club">Barto Club</option>
+          <option value="Baroque Works">Baroque Works</option>
+          <option value="Donquixote Doflamingo">Donquixote Doflamingo</option>
+          <option value="FILM">FILM</option>
+          <option value="Fish-Man">Fish-Man</option>
+          <option value="Heart Pirates">Heart Pirates</option>
+          <option value="Jellyfish Pirates">Jellyfish Pirates</option>
+          <option value="Kid Pirates">Kid Pirates</option>
+          <option value="Minks">Minks</option>
+          <option value="Navy">Navy</option>
+          <option value="Red-Haired Pirates">Red-Haired Pirates</option>
+          <option value="Straw Hat Crew">Straw Hat Crew</option>
+          <option value="Supernovas">Supernovas</option>
+          <option value="The Four Emperors">The Four Emperors</option>
+          <option value="The Seven Warlords of the Sea">The Seven Warlords of the Sea</option>
+          <option value="The Sun Pirates">The Sun Pirates</option>
+          <option value="The Vinsmoke Family">The Vinsmoke Family</option>
+          <option value="Whitebeard Pirates">Whitebeard Pirates</option>
+        </optgroup>
+      </select>
+    </div>
+    <button class="reset-button" (click)="resetFilters()">Reset Filters</button>
   </div>
-</div>
-
-<div class="reset-container">
-  <button (click)="resetFilters()">Reset Filters</button>
 </div>
