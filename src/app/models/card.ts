@@ -9,6 +9,9 @@ export interface Card {
     large: string;
   };
   cost?: number;
+  attribute: {
+    image: string;
+  };
   power: number;
   counter: string;
   color: string;
