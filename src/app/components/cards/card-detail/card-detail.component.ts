@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, HostListener, ElementRef, AfterViewInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Card } from '../../models/card';
+import { Card } from '../../../models/card';
 
 @Component({
   selector: 'app-card-detail',
