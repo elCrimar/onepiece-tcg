@@ -10,24 +10,51 @@
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  padding: 2rem;
   overflow-y: auto;
 }
 
 .modal-content {
   position: relative;
   width: 80%;
-  max-height: 80vh;
+  max-height: 90%;
   background: #2c2c2c;
   display: flex;
-  padding: 2rem 0rem;
+  flex-direction: column;
   border-radius: 15px;
-  gap: 2rem;
   overflow-y: auto;
+}
+
+// Header Styles
+.card-header {
+  text-align: center;
+  padding: 1rem;
+  border-bottom: 2px solid #444;
+  
+  h1 {
+    margin: 0;
+    font-size: 2rem;
+    color: #fff;
+  }
+}
+
+.card-subheader {
+  margin-top: 0.5rem;
+  color: #b2b2b2;
+  font-size: 1.1rem;
+  
+  span {
+    padding: 0 0.5rem;
+  }
+}
+
+// Body Styles
+.modal-body {
+  display: flex;
+  padding: 2rem;
+  gap: 2rem;
 
   @media (max-width: 768px) {
     flex-direction: column;
-    padding: 1rem;
   }
 }
 
@@ -38,7 +65,7 @@
   justify-content: center;
 
   img {
-    max-width: 70%;
+    max-width: 65%;
     height: auto;
     object-fit: contain;
     border-radius: 10px;
@@ -52,15 +79,9 @@
   flex-direction: column;
   gap: 1.5rem;
   padding: 1rem;
-
-  h2 {
-    margin: 0;
-    color: #fff;
-    border-bottom: 2px solid #444;
-    padding-bottom: 0.5rem;
-  }
 }
 
+// Card Info Styles
 .card-info {
   display: flex;
   flex-direction: column;
@@ -78,6 +99,7 @@
   }
 }
 
+// Button Styles
 .close-button {
   margin-top: auto;
   padding: 0.5rem 1rem;
