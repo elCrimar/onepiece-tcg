@@ -10,6 +10,7 @@ export interface Card {
   };
   cost?: number;
   attribute: {
+    name: string;
     image: string;
   };
   power: number;

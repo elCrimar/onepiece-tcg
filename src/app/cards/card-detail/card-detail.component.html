@@ -33,6 +33,8 @@
             <div class="info-row">
               <span class="label">Atributo:</span>
               <span *ngIf="!card?.attribute?.image || card?.attribute?.image?.endsWith('undefined')">-</span>
+
+              <span *ngIf="card?.attribute?.name">{{ card?.attribute?.name }}</span>
               <img *ngIf="card?.attribute?.image && !card?.attribute?.image?.endsWith('undefined')" 
                    [src]="card?.attribute?.image" 
                    alt="Attribute Image">
@@ -41,9 +43,9 @@
 
           <!-- Segunda fila: Poder y Counter -->
           <div class="info-grid">
-            <div class="info-row" *ngIf="card?.power">
+            <div class="info-row">
               <span class="label">Poder:</span>
-              <span>{{ card?.power }}</span>
+              <span>{{ card?.power || '-' }}</span>
             </div>
             <div class="info-row">
               <span class="label">Counter:</span>
