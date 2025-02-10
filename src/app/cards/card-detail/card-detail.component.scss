@@ -30,17 +30,19 @@
   text-align: center;
   padding: 1rem;
   border-bottom: 2px solid #444;
+  background-color: #1a1a1a;
+  border-radius: 15px 15px 0 0;
   
   h1 {
     margin: 0;
-    font-size: 2rem;
+    font-size: 2.2rem;
     color: #fff;
   }
 }
 
 .card-subheader {
   margin-top: 0.5rem;
-  color: #c5c5c5;
+  color: #b2b2b2;
   font-size: 1.1rem;
   
   span {
