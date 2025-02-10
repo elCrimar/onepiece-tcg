@@ -24,7 +24,26 @@ export class CardDetailComponent implements AfterViewInit {
 
   formatAbility(ability: string | undefined): string {
     if (!ability) return '';
-    return ability.replace('[Counter]', '<span class="counter-badge">⚡Counter&nbsp</span>');
+    return ability
+    .replace('[Counter]', '<span class="counter-badge">⚡Counter&nbsp</span>')
+    .replace('[Blocker]', '<span class="blocker-badge">Blocker</span>')
+    .replace('[Rush]', '<span class="blocker-badge">Rush</span>')
+    .replace('[On Play]', '<span class="blue-badge">On Play</span>')
+    .replace('[When Attacking]', '<span class="blue-badge">When Attacking</span>')
+    .replace('[Activate: Main]', '<span class="blue-badge">Activate: Main</span>')
+    .replace('[Your Turn]', '<span class="blue-badge">Your Turn</span>')
+    .replace('[On K.O.]', '<span class="blue-badge">On K.O.</span>')
+    .replace('[Main]', '<span class="blue-badge">Main</span>')
+    .replace("[On Your Opponent's Attack]", '<span class="blue-badge">On Your Opponent\'s Attack</span>')
+    .replace('[DON!! x1]', '<span class="black-badge">DON!! x1</span>')
+    .replace('[DON!! x2]', '<span class="black-badge">DON!! x2</span>')
+    .replace('[DON!! x3]', '<span class="black-badge">DON!! x3</span>')
+    .replace('[Once Per Turn]', '<span class="red-badge">Once Per Turn</span>')
+    .replace('[Trigger]', '<span class="trigger-badge">Trigger</span>')
+    .replace('➀', '<span class="don-number">①</span>')
+    .replace('➁', '<span class="don-number">②</span>')
+    .replace('③', '<span class="don-number">③</span>')
+    .replace('➃', '<span class="don-number">④</span>');
   }
 
   formatTrigger(trigger: string | undefined): string {

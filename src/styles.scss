@@ -28,3 +28,48 @@ html, body {
   clip-path: polygon(0 0, 100% 0, 90% 100%, 0% 100%);
   position: relative;
 }
+
+.blocker-badge {
+  background-color: #c07d00;
+  color: white;
+  padding: 0 8px;
+  font-weight: bold;
+  display: inline-block;
+  clip-path: polygon(10% 0, 90% 0, 100% 50%, 90% 100%, 10% 100%, 0 50%);
+}
+
+.blue-badge {
+  background-color: #006ee4;
+  color: white;
+  padding: 0 6px;
+  font-weight: bold;
+  display: inline-block;
+  border-radius: 10px;
+  border: 1px solid white;
+}
+
+.black-badge {
+  background-color: black;
+  color: white;
+  padding: 0 6px;
+  font-weight: bold;
+  display: inline-block;
+  border-radius: 10px;
+  border: 1px solid white;
+}
+
+.red-badge {
+  background-color: rgb(255, 47, 47);
+  color: white;
+  padding: 0 6px;
+  font-weight: bold;
+  display: inline-block;
+  border-radius: 10px;
+  border: 1px solid white;
+}
+
+.don-number {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #fff;
+}
