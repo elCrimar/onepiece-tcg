@@ -1,5 +1,8 @@
 <div class="modal-background" (click)="closeModal()">
   <div class="modal-content" (click)="$event.stopPropagation()">
+    <!-- Close button -->
+    <button class="close-button" (click)="closeModal()">×</button>
+    
     <!-- Header section -->
     <div class="card-header">
       <h1>{{ card?.name }}</h1>
@@ -73,8 +76,6 @@
             <span>{{ card?.set?.name }}</span>
           </div>
         </div>
-
-        <button class="close-button" (click)="closeModal()">Cerrar</button>
       </div>
     </div>
   </div>

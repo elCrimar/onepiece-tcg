@@ -11,6 +11,7 @@
   justify-content: center;
   z-index: 1000;
   overflow-y: auto;
+  font-size: large;
 }
 
 .modal-content {
@@ -122,16 +123,24 @@
 
 // Button Styles
 .close-button {
-  margin-top: auto;
-  padding: 0.5rem 1rem;
-  background-color: #004f77;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
   border: none;
-  border-radius: 5px;
-  color: white;
+  color: #b2b2b2;
+  font-size: 34px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
 
   &:hover {
-    background-color: #555;
+    background-color: rgba(255,255,255,0.1);
+    color: white;
   }
 }
