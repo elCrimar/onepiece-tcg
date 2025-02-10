@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
   private baseUrl = '/api/api/one-piece';
-  private apiKey = 'd3a2475eeb6759c8a508c8a5d91b028e5fcd4ab54d1030f3f8a4e5db5e57ad2b'; // ⚠️ Mejor almacenarlo en enviroments.ts
+  private apiKey = environment.apiKey;
 
   constructor(private http: HttpClient) {}
 
