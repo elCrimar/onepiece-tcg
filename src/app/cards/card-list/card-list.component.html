@@ -9,7 +9,13 @@
     <img [src]="card.images.large" [alt]="card.name" loading="lazy" />
   </div>
 </div>
-<!-- Elemento disparador para el IntersectionObserver -->
+
 <div #scrollTrigger style="height: 1px;"></div>
 
-<app-card-detail *ngIf="showModal" [card]="selectedCard" (close)="closeModal()"></app-card-detail>
+<app-card-detail 
+  *ngIf="showModal" 
+  [card]="selectedCard" 
+  (close)="closeModal()"
+  (previous)="previousCard()"
+  (next)="nextCard()">
+</app-card-detail>

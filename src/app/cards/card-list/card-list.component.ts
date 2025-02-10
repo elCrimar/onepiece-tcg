@@ -157,4 +157,20 @@ export class CardListComponent implements OnInit, AfterViewInit {
     this.showModal = false;
     this.selectedCard = undefined;
   }
+  
+  previousCard(): void {
+    if (!this.selectedCard || this.cards.length === 0) return;
+    const currentIndex = this.cards.findIndex(c => c.id === this.selectedCard!.id);
+    if (currentIndex > 0) {
+      this.selectedCard = this.cards[currentIndex - 1];
+    }
+  }
+
+  nextCard(): void {
+    if (!this.selectedCard || this.cards.length === 0) return;
+    const currentIndex = this.cards.findIndex(c => c.id === this.selectedCard!.id);
+    if (currentIndex >= 0 && currentIndex < this.cards.length - 1) {
+      this.selectedCard = this.cards[currentIndex + 1];
+    }
+  }
 }
