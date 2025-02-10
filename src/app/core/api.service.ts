@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
   private baseUrl = '/api/api/one-piece';
-  private apiKey = '296d2b7ea7ab3b186a82ff74725b316a6166b629a3abd4c66466a11a41e014b6'; // ⚠️ Mejor almacenarlo en enviroments.ts
+  private apiKey = 'd3a2475eeb6759c8a508c8a5d91b028e5fcd4ab54d1030f3f8a4e5db5e57ad2b'; // ⚠️ Mejor almacenarlo en enviroments.ts
 
   constructor(private http: HttpClient) {}
 
