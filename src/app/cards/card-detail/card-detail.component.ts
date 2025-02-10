@@ -51,6 +51,23 @@ export class CardDetailComponent implements AfterViewInit {
     return trigger.replace('[Trigger]', '<span class="trigger-badge">Trigger</span>');
   }
 
+  getIndicatorColor(color?: string): string {
+    if (!color) {
+      return 'transparent';
+    }
+    
+    if (color.includes('/')) {
+      const colors = color.split('/');
+      if (colors.length === 2) {
+        const c1 = colors[0].trim();
+        const c2 = colors[1].trim();
+        return `linear-gradient(90deg, ${c1} 50%, ${c2} 50%)`;
+      }
+    }
+    
+    return color;
+  }
+
   closeModal(): void {
     this.close.emit();
   }

@@ -178,3 +178,11 @@
     right: 4%;
   }
 }
+
+.color-indicator {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: #b6b6b6 0 0 0 2px;
+}

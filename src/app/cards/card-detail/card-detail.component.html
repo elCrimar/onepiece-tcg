@@ -55,6 +55,7 @@
           <div class="info-row">
             <span class="label">Color:</span>
             <span>{{ card?.color }}</span>
+            <span class="color-indicator" [ngStyle]="{'background': getIndicatorColor(card?.color)}"></span>
           </div>
 
           <!-- Familia -->
