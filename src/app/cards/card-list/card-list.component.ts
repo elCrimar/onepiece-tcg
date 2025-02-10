@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CardService } from '../../core/card.service';
+import { CardService } from '../../services/card.service';
 import { Card } from '../../models/card';
 import { SearchBarComponent } from '../../search/search-bar/search-bar.component';
 import { CardDetailComponent } from '../card-detail/card-detail.component';
