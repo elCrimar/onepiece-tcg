@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { CardService } from '../../core/card.service';
 import { Card } from '../../models/card';
 import { SearchBarComponent } from '../../search/search-bar/search-bar.component';
+import { CardDetailComponent } from '../card-detail/card-detail.component';
 
 @Component({
   selector: 'app-card-list',
   standalone: true,
-  imports: [CommonModule, SearchBarComponent],
+  imports: [CommonModule, SearchBarComponent, CardDetailComponent],
   templateUrl: './card-list.component.html',
   styleUrls: ['./card-list.component.scss']
 })
@@ -20,6 +21,9 @@ export class CardListComponent implements OnInit, AfterViewInit {
 
   currentExpansionIndex = 0;
   expansionCodes!: string[];
+
+  showModal = false;
+  selectedCard?: Card;
   
   // Modo búsqueda y filtros
   searchMode: boolean = false;
@@ -142,5 +146,15 @@ export class CardListComponent implements OnInit, AfterViewInit {
     this.cards = [];
     this.currentPage = 1;
     this.loadSearchCards();
+  }
+
+  openModal(card: Card): void {
+    this.selectedCard = card;
+    this.showModal = true;
+  }
+
+  closeModal(): void {
+    this.showModal = false;
+    this.selectedCard = undefined;
   }
 }

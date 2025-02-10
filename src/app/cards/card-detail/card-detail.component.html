@@ -1,1 +1,64 @@
-<p>card-detail works!</p>
+<div class="modal-background" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="left-panel">
+      <img [src]="card?.images?.large" [alt]="card?.name">
+    </div>
+    <div class="right-panel">
+      <h2>{{ card?.name }}</h2>
+      
+      <div class="card-info">
+        <div class="info-row">
+          <span class="label">Tipo:</span>
+          <span>{{ card?.type }}</span>
+        </div>
+        
+        <div class="info-row">
+          <span class="label">Rareza:</span>
+          <span>{{ card?.rarity }}</span>
+        </div>
+
+        <div class="info-row" *ngIf="card?.cost !== undefined">
+          <span class="label">{{ card?.type === 'LEADER' ? 'Vidas' : 'Coste' }}:</span>
+          <span>{{ card?.cost }}</span>
+        </div>
+
+        <div class="info-row">
+          <span class="label">Poder:</span>
+          <span>{{ card?.power }}</span>
+        </div>
+
+        <div class="info-row">
+          <span class="label">Counter:</span>
+          <span>{{ card?.counter }}</span>
+        </div>
+
+        <div class="info-row">
+          <span class="label">Color:</span>
+          <span>{{ card?.color }}</span>
+        </div>
+
+        <div class="info-row">
+          <span class="label">Familia:</span>
+          <span>{{ card?.family }}</span>
+        </div>
+
+        <div class="info-row">
+          <span class="label">Habilidad:</span>
+          <span [innerHTML]="formatAbility(card?.ability)"></span>
+        </div>
+
+        <div class="info-row">
+          <span class="label">Trigger:</span>
+          <span [innerHTML]="formatTrigger(card?.trigger)"></span>
+        </div>
+
+        <div class="info-row" *ngIf="card?.set?.name">
+          <span class="label">Set:</span>
+          <span>{{ card?.set?.name }}</span>
+        </div>
+      </div>
+
+      <button class="close-button" (click)="closeModal()">Cerrar</button>
+    </div>
+  </div>
+</div>

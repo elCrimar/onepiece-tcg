@@ -5,9 +5,11 @@
 </div>
 
 <div class="cards-grid" *ngIf="cards.length > 0">
-  <div class="card-item" *ngFor="let card of cards">
+  <div class="card-item" *ngFor="let card of cards" (click)="openModal(card)">
     <img [src]="card.images.large" [alt]="card.name" loading="lazy" />
   </div>
 </div>
 <!-- Elemento disparador para el IntersectionObserver -->
 <div #scrollTrigger style="height: 1px;"></div>
+
+<app-card-detail *ngIf="showModal" [card]="selectedCard" (close)="closeModal()"></app-card-detail>

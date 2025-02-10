@@ -7,3 +7,24 @@ html, body {
   color: #fff;
   font-family: 'Roboto', sans-serif;
 }
+
+.counter-badge {
+  background-color: #C20419;
+  color: white;
+  padding: 0.5px 0.5px;
+  border-radius: 4px;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.trigger-badge {
+  background-color: #fff600;
+  color: black;
+  border-radius: 1px;
+  padding: 2px 10px;
+  font-weight: bold;
+  display: inline-block;
+  margin: 0 2px;
+  clip-path: polygon(0 0, 100% 0, 90% 100%, 0% 100%);
+  position: relative;
+}
