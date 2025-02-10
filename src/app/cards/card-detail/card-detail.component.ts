@@ -12,6 +12,8 @@ import { Card } from '../../models/card';
 export class CardDetailComponent {
   @Input() card?: Card;
   @Output() close = new EventEmitter<void>();
+  @Output() previous = new EventEmitter<void>();
+  @Output() next = new EventEmitter<void>();
 
   formatAbility(ability: string | undefined): string {
     if (!ability) return '';

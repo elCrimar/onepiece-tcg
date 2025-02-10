@@ -1,4 +1,9 @@
 <div class="modal-background" (click)="closeModal()">
+  <!-- Botón Anterior -->
+  <button class="nav-button prev-button" (click)="previous.emit(); $event.stopPropagation()">
+    <span>❮</span>
+  </button>
+
   <div class="modal-content" (click)="$event.stopPropagation()">
     <!-- Close button -->
     <button class="close-button" (click)="closeModal()">×</button>
@@ -79,4 +84,9 @@
       </div>
     </div>
   </div>
+
+  <!-- Botón Siguiente -->
+  <button class="nav-button next-button" (click)="next.emit(); $event.stopPropagation()">
+    <span>❯</span>
+  </button>
 </div>
