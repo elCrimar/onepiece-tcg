@@ -1,0 +1,14 @@
+version: '3'
+services:
+  onepiecetcg-webui:
+    build:
+      context: .
+    image: onepiecetcg/webui:latest
+    container_name: onepiecetcg-webui
+    env_file:
+      - .docker/environment/local.env
+    environment:
+      DEBUG: "True"
+      BACKEND_URL: "https://apitcg.com/api/one-piece/"
+    ports:
+      - 8082:80
