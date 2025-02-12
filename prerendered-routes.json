@@ -1,0 +1,8 @@
+{
+  "routes": {
+    "/": {},
+    "/cards": {},
+    "/deck-builder": {},
+    "/decks": {}
+  }
+}
