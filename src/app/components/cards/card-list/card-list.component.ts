@@ -66,7 +66,8 @@ export class CardListComponent implements OnInit, AfterViewInit {
 
   loadMoreCards(): void {
     if (this.loading) return;
-    if (this.currentPage > this.totalPages && this.totalPages !== 1) return;
+    // Aquí está el cambio: eliminar la condición especial para totalPages === 1
+    if (this.currentPage > this.totalPages) return;
 
     // Aquí es donde realmente cambiamos a loading = true
     this.loading = true;
@@ -76,11 +77,13 @@ export class CardListComponent implements OnInit, AfterViewInit {
       next: (response) => {
         this.totalPages = response.totalPages;
         
-        if (response.data && response.data.length > 0) {
+        // Añadir verificación para manejar respuestas vacías
+        if (!response.data || response.data.length === 0) {
+          console.log('No hay más cartas para mostrar');
+          this.currentPage = this.totalPages + 1; // Aseguramos que no se hagan más peticiones
+        } else {
           this.displayedCards = [...this.displayedCards, ...response.data];
           this.currentPage++;
-          
-          // Para debug - quitar después
           console.log(`Mostrando cartas página ${this.currentPage-1} de ${this.totalPages}`);
         }
         
@@ -103,7 +106,8 @@ export class CardListComponent implements OnInit, AfterViewInit {
 
   loadSearchCards(): void {
     if (this.loading) return;
-    if (this.currentPage > this.totalPages && this.totalPages !== 1) return;
+    // También modificar aquí la condición
+    if (this.currentPage > this.totalPages) return;
 
     this.loading = true;
     console.log(`Solicitando búsqueda página ${this.currentPage}`);
@@ -111,13 +115,21 @@ export class CardListComponent implements OnInit, AfterViewInit {
     this.cardService.searchCards(this.searchFilters, this.currentPage, this.limit).subscribe({
       next: res => {
         this.totalPages = res.totalPages;
+        
         // Si no se encontraron cartas y es la primera página, se mostrará el mensaje
         if(this.currentPage === 1 && res.data.length === 0){
           this.displayedCards = [];
-        } else {
+        } 
+        // Añadir verificación para manejar respuestas vacías en páginas posteriores
+        else if (res.data.length === 0) {
+          console.log('No hay más cartas para mostrar');
+          this.currentPage = this.totalPages + 1; // Aseguramos que no se hagan más peticiones
+        }
+        else {
           this.displayedCards = this.displayedCards.concat(res.data);
           this.currentPage++;
         }
+        
         this.loading = false;
         if (this.intersectionObserver && this.scrollTrigger) {
           setTimeout(() => {

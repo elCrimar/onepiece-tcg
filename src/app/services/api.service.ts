@@ -7,14 +7,22 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class ApiService {
-  private baseUrl = '/api/api/one-piece';
-  private apiKey = environment.apiKey;
+  // private baseUrl = '/api/api/one-piece';
+  // private apiKey = environment.apiKey;
+  private baseUrl = '/api';
 
   constructor(private http: HttpClient) {}
 
+  // private getHeaders(): HttpHeaders {
+  //   return new HttpHeaders({
+  //     'x-api-key': this.apiKey
+  //   });
+  // }
+
   private getHeaders(): HttpHeaders {
     return new HttpHeaders({
-      'x-api-key': this.apiKey
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
     });
   }
 
