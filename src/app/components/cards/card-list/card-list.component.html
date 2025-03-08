@@ -1,12 +1,12 @@
 <app-search-bar (search)="onSearch($event)"></app-search-bar>
 
-<div *ngIf="!loading && cards.length === 0" class="no-cards-message">
+<div *ngIf="!loading && displayedCards.length === 0" class="no-cards-message">
   No se encontró ninguna carta
 </div>
 
-<div class="cards-grid" *ngIf="cards.length > 0">
-  <div class="card-item" *ngFor="let card of cards" (click)="openModal(card)">
-    <img [src]="card.images.large" [alt]="card.name" loading="lazy" />
+<div class="cards-grid" *ngIf="displayedCards.length > 0">
+  <div class="card-item" *ngFor="let card of displayedCards" (click)="openModal(card)">
+    <img [src]="card.images" [alt]="card.name" loading="lazy" />
   </div>
 </div>
 
