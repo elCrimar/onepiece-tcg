@@ -1,0 +1,30 @@
+<nav class="navbar">
+  <div class="container">
+    <div class="logo">
+      <a routerLink="/">
+        <img src="../../../assets/images/logo.webp" alt="One Piece TCG" />
+      </a>
+    </div>
+    
+    <div class="nav-links">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Inicio</a>
+      <a routerLink="/cartas" routerLinkActive="active">Cartas</a>
+      <a routerLink="/mazos" routerLinkActive="active">Mazos</a>
+      <a routerLink="/noticias" routerLinkActive="active">Noticias</a>
+    </div>
+
+    <button class="mobile-menu-btn" (click)="toggleMobileMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Menu móvil -->
+<div class="mobile-menu" [class.open]="isMobileMenuOpen">
+  <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeMobileMenu()">Inicio</a>
+  <a routerLink="/cartas" routerLinkActive="active" (click)="closeMobileMenu()">Cartas</a>
+  <a routerLink="/mazos" routerLinkActive="active" (click)="closeMobileMenu()">Mazos</a>
+  <a routerLink="/noticias" routerLinkActive="active" (click)="closeMobileMenu()">Noticias</a>
+</div>
