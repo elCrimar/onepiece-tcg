@@ -74,7 +74,7 @@
   <div class="filter">
     <label>Counter:</label>
     <select [(ngModel)]="filters.counter">
-      <option value="">Todas</option>
+      <option value="">Todos</option>
       <option value="-">Sin counter</option>
       <option value="1000">1000</option>
       <option value="2000">2000</option>
@@ -86,21 +86,22 @@
     <label>Color:</label>
     <select [(ngModel)]="filters.color">
       <option value="">Todos</option>
-      <option value="Red">Red</option>
-      <option value="Black">Black</option>
-      <option value="Blue">Blue</option>
-      <option value="Green">Green</option>
-      <option value="Purple">Purple</option>
-      <option value="Yellow">Yellow</option>
+      <option value="Red" style="color: red; font-weight: bold;">Red</option>
+      <option value="Black" style="color: black; font-weight: bold;">Black</option>
+      <option value="Blue" style="color: blue; font-weight: bold;">Blue</option>
+      <option value="Green" style="color: green; font-weight: bold;">Green</option>
+      <option value="Purple" style="color: purple; font-weight: bold;">Purple</option>
+      <option value="Yellow" style="color: #e6b800; font-weight: bold;">Yellow</option>
     </select>
   </div>
-  
+
   <!-- Trigger -->
   <div class="filter">
     <label>Trigger:</label>
-    <select [(ngModel)]="filters.trigger">
-      <option value="">Todos</option>
-      <option value="trigger">Sí</option>
+    <select [(ngModel)]="triggerSelection" (ngModelChange)="updateTriggerFilter()">
+      <option value="all">Todos</option>
+      <option value="yes">Sí</option>
+      <option value="no">No</option>
     </select>
   </div>
 

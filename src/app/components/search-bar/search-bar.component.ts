@@ -13,6 +13,9 @@ export class SearchBarComponent {
     // Campo principal para búsqueda por nombre
     searchTerm: string = '';
     
+    // Para manejar el filtro de trigger
+    triggerSelection: string = 'all';
+    
     // Filtros adicionales
     filters = {
         rarity: '',
@@ -22,10 +25,26 @@ export class SearchBarComponent {
         counter: '',
         color: '',
         family: '',
-        trigger: ''
+        trigger: '',
+        empty_trigger: ''
     };
 
     @Output() search: EventEmitter<any> = new EventEmitter();
+
+    // Método para actualizar los filtros de trigger según la selección
+    updateTriggerFilter(): void {
+        // Limpiar ambos filtros primero
+        this.filters.trigger = '';
+        this.filters.empty_trigger = '';
+        
+        // Establecer el filtro correspondiente según la selección
+        if (this.triggerSelection === 'yes') {
+            this.filters.trigger = 'trigger';
+        } else if (this.triggerSelection === 'no') {
+            this.filters.empty_trigger = 'true';
+        }
+        // Si es 'all', ambos permanecen vacíos
+    }
 
     onSearch(): void {
         // Crear un objeto limpio para los filtros
@@ -51,6 +70,8 @@ export class SearchBarComponent {
 
     resetFilters(): void {
         this.searchTerm = '';
+        this.triggerSelection = 'all'; // Resetear también la selección de trigger
+        
         this.filters = {
             rarity: '',
             type: '',
@@ -59,8 +80,10 @@ export class SearchBarComponent {
             counter: '',
             color: '',
             family: '',
-            trigger: ''
+            trigger: '',
+            empty_trigger: ''
         };
+        
         console.log('Filtros reseteados, emitiendo evento de búsqueda vacía');
         this.onSearch();
     }
