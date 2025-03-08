@@ -30,16 +30,44 @@
     </select>
   </div>
 
-  <!-- Cost -->
+  <!-- Cost como Select -->
   <div class="filter">
     <label>Cost:</label>
-    <input type="number" min="0" max="10" [(ngModel)]="filters.cost" placeholder="0-10" />
+    <select [(ngModel)]="filters.cost">
+      <option value="">Todos</option>
+      <option value="0">0</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
   </div>
 
-  <!-- Power -->
+  <!-- Power como Select -->
   <div class="filter">
     <label>Power:</label>
-    <input type="number" min="0" max="12000" step="1000" [(ngModel)]="filters.power" placeholder="0-12000" />
+    <select [(ngModel)]="filters.power">
+      <option value="">Todos</option>
+      <option value="0">0</option>
+      <option value="1000">1000</option>
+      <option value="2000">2000</option>
+      <option value="3000">3000</option>
+      <option value="4000">4000</option>
+      <option value="5000">5000</option>
+      <option value="6000">6000</option>
+      <option value="7000">7000</option>
+      <option value="8000">8000</option>
+      <option value="9000">9000</option>
+      <option value="10000">10000</option>
+      <option value="11000">11000</option>
+      <option value="12000">12000</option>
+    </select>
   </div>
 
   <!-- Counter -->

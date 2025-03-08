@@ -28,10 +28,25 @@ export class SearchBarComponent {
     @Output() search: EventEmitter<any> = new EventEmitter();
 
     onSearch(): void {
-        this.search.emit({
-            name: this.searchTerm,
-            ...this.filters
+        // Crear un objeto limpio para los filtros
+        const cleanFilters: any = {};
+        
+        // Solo agregar propiedades con valores no vacíos
+        Object.entries(this.filters).forEach(([key, value]) => {
+            // Solo incluir el filtro si tiene un valor no vacío
+            if (value !== '' && value !== null && value !== undefined) {
+                cleanFilters[key] = value;
+            }
         });
+
+        // Crear el objeto de búsqueda final
+        const searchData = {
+            ...(this.searchTerm ? { name: this.searchTerm } : {}),
+            ...cleanFilters
+        };
+
+        console.log('Enviando filtros:', searchData);
+        this.search.emit(searchData);
     }
 
     resetFilters(): void {
@@ -46,6 +61,7 @@ export class SearchBarComponent {
             family: '',
             trigger: ''
         };
+        console.log('Filtros reseteados, emitiendo evento de búsqueda vacía');
         this.onSearch();
     }
 }
