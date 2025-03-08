@@ -14,6 +14,9 @@
         "@angular/platform-server": "^19.1.0",
         "@angular/router": "^19.1.0",
         "@angular/ssr": "^19.1.5",
+        "@fortawesome/angular-fontawesome": "^1.0.0",
+        "@fortawesome/fontawesome-svg-core": "^6.7.2",
+        "@fortawesome/free-solid-svg-icons": "^6.7.2",
         "express": "^4.18.2",
         "rxjs": "~7.8.0",
         "tslib": "^2.3.0",
@@ -308,6 +311,14 @@
     "@esbuild/win32-ia32": ["@esbuild/win32-ia32@0.24.2", "", { "os": "win32", "cpu": "ia32" }, "sha512-q+iGUwfs8tncmFC9pcnD5IvRHAzmbwQ3GPS5/ceCyHdjXubwQWI12MKWSNSMYLJMq23/IUCvJMS76PDqXe1fxA=="],
 
     "@esbuild/win32-x64": ["@esbuild/win32-x64@0.24.2", "", { "os": "win32", "cpu": "x64" }, "sha512-7VTgWzgMGvup6aSqDPLiW5zHaxYJGTO4OokMjIlrCtf+VpEL+cXKtCvg723iguPYI5oaUNdS+/V7OU2gvXVWEg=="],
+
+    "@fortawesome/angular-fontawesome": ["@fortawesome/angular-fontawesome@1.0.0", "", { "dependencies": { "@fortawesome/fontawesome-svg-core": "^6.7.1", "tslib": "^2.8.1" }, "peerDependencies": { "@angular/core": "^19.0.0" } }, "sha512-EC2fYuXIuw2ld1kzJi+zysWus6OeGGfLQtbh0hW9zyyq5aBo8ZJkcJKBsVQ8E6Mg7nHyTWaXn+sdcXTPDWz+UQ=="],
+
+    "@fortawesome/fontawesome-common-types": ["@fortawesome/fontawesome-common-types@6.7.2", "", {}, "sha512-Zs+YeHUC5fkt7Mg1l6XTniei3k4bwG/yo3iFUtZWd/pMx9g3fdvkSK9E0FOC+++phXOka78uJcYb8JaFkW52Xg=="],
+
+    "@fortawesome/fontawesome-svg-core": ["@fortawesome/fontawesome-svg-core@6.7.2", "", { "dependencies": { "@fortawesome/fontawesome-common-types": "6.7.2" } }, "sha512-yxtOBWDrdi5DD5o1pmVdq3WMCvnobT0LU6R8RyyVXPvFRd2o79/0NCuQoCjNTeZz9EzA9xS3JxNWfv54RIHFEA=="],
+
+    "@fortawesome/free-solid-svg-icons": ["@fortawesome/free-solid-svg-icons@6.7.2", "", { "dependencies": { "@fortawesome/fontawesome-common-types": "6.7.2" } }, "sha512-GsBrnOzU8uj0LECDfD5zomZJIjrPhIlWU82AHwa2s40FKH+kcxQaBvBo3Z4TxyZHIyX8XTDxsyA33/Vx9eFuQA=="],
 
     "@inquirer/checkbox": ["@inquirer/checkbox@4.1.1", "", { "dependencies": { "@inquirer/core": "^10.1.6", "@inquirer/figures": "^1.0.10", "@inquirer/type": "^3.0.4", "ansi-escapes": "^4.3.2", "yoctocolors-cjs": "^2.1.2" }, "peerDependencies": { "@types/node": ">=18" }, "optionalPeers": ["@types/node"] }, "sha512-os5kFd/52gZTl/W6xqMfhaKVJHQM8V/U1P8jcSaQJ/C4Qhdrf2jEXdA/HaxfQs9iiUA/0yzYhk5d3oRHTxGDDQ=="],
 
