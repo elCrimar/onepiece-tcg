@@ -1,3 +1,8 @@
+:host {
+    display: block;
+    margin: 0 100px; /* Mismo margen horizontal que el search-bar */
+}
+
 .cards-grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
