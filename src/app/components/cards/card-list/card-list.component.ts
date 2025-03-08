@@ -106,7 +106,6 @@ export class CardListComponent implements OnInit, AfterViewInit {
 
   loadSearchCards(): void {
     if (this.loading) return;
-    // También modificar aquí la condición
     if (this.currentPage > this.totalPages) return;
 
     this.loading = true;
@@ -119,6 +118,10 @@ export class CardListComponent implements OnInit, AfterViewInit {
         // Si no se encontraron cartas y es la primera página, se mostrará el mensaje
         if(this.currentPage === 1 && res.data.length === 0){
           this.displayedCards = [];
+          // Importante: asegurarnos de que no se hagan más peticiones
+          this.currentPage = 2; // Para evitar más cargas
+          this.totalPages = 1; // Solo hay una página (vacía)
+          console.log('Búsqueda sin resultados');
         } 
         // Añadir verificación para manejar respuestas vacías en páginas posteriores
         else if (res.data.length === 0) {
