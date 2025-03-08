@@ -13,14 +13,11 @@ import { CardDetailComponent } from '../card-detail/card-detail.component';
   styleUrls: ['./card-list.component.scss']
 })
 export class CardListComponent implements OnInit, AfterViewInit {
-  cards: Card[] = [];
+  displayedCards: Card[] = []; // Cartas que se muestran actualmente
   currentPage = 1;
   limit = 36;
   totalPages = 1;
   loading = false;
-
-  currentExpansionIndex = 0;
-  expansionCodes!: string[];
 
   showModal = false;
   selectedCard?: Card;
@@ -35,31 +32,18 @@ export class CardListComponent implements OnInit, AfterViewInit {
   constructor(private cardService: CardService) {}
 
   ngOnInit(): void {
-    this.expansionCodes = [
-      this.cardService.opCodes.OP01,
-      this.cardService.opCodes.OP02,
-      this.cardService.opCodes.OP03,
-      this.cardService.opCodes.OP04,
-      this.cardService.opCodes.OP05,
-      this.cardService.opCodes.OP06,
-      this.cardService.opCodes.OP07,
-      this.cardService.opCodes.OP08,
-      this.cardService.opCodes.OP09,
-      this.cardService.ebCode,
-      ...Object.values(this.cardService.stCodes)
-    ];
-    this.loadCards();
+    this.loadInitialCards();
   }
 
   ngAfterViewInit(): void {
     if (typeof window !== 'undefined' && 'IntersectionObserver' in window && this.scrollTrigger) {
       this.intersectionObserver = new IntersectionObserver(
         (entries) => {
-          if (entries[0].isIntersecting) {
+          if (entries[0].isIntersecting && !this.loading) {
             if (this.searchMode) {
               this.loadSearchCards();
             } else {
-              this.loadCards();
+              this.loadMoreCards();
             }
           }
         },
@@ -69,33 +53,49 @@ export class CardListComponent implements OnInit, AfterViewInit {
     }
   }
 
-  loadCards(): void {
+  loadInitialCards(): void {
     if (this.loading) return;
-    if (this.currentExpansionIndex >= this.expansionCodes.length) return;
+    
+    // NO establecemos loading en true aquí, porque luego llamamos a loadMoreCards
+    this.displayedCards = [];
+    this.currentPage = 1;
+    
+    // Cargamos la primera página directamente, que ya se encargará de establecer loading = true
+    this.loadMoreCards();
+  }
 
+  loadMoreCards(): void {
+    if (this.loading) return;
+    if (this.currentPage > this.totalPages && this.totalPages !== 1) return;
+
+    // Aquí es donde realmente cambiamos a loading = true
     this.loading = true;
-    const codePrefix = this.expansionCodes[this.currentExpansionIndex];
-
-    this.cardService.getCardsByCode(codePrefix, this.currentPage, this.limit).subscribe({
-      next: res => {
-        this.totalPages = res.totalPages;
-        if (res.data.length === 0 || this.currentPage > this.totalPages) {
-          this.currentExpansionIndex++;
-          this.currentPage = 1;
-          this.loading = false;
-          this.loadCards();
-          return;
+    console.log(`Solicitando página ${this.currentPage} de tarjetas`);
+    
+    this.cardService.getCardsByPage(this.currentPage, this.limit).subscribe({
+      next: (response) => {
+        this.totalPages = response.totalPages;
+        
+        if (response.data && response.data.length > 0) {
+          this.displayedCards = [...this.displayedCards, ...response.data];
+          this.currentPage++;
+          
+          // Para debug - quitar después
+          console.log(`Mostrando cartas página ${this.currentPage-1} de ${this.totalPages}`);
         }
-        this.cards = this.cards.concat(res.data);
-        this.currentPage++;
+        
         this.loading = false;
+        
+        // Reobservar para el scroll infinito
         if (this.intersectionObserver && this.scrollTrigger) {
-          this.intersectionObserver.unobserve(this.scrollTrigger.nativeElement);
-          this.intersectionObserver.observe(this.scrollTrigger.nativeElement);
+          setTimeout(() => {
+            this.intersectionObserver.unobserve(this.scrollTrigger.nativeElement);
+            this.intersectionObserver.observe(this.scrollTrigger.nativeElement);
+          }, 100);
         }
       },
-      error: err => {
-        console.error('Error al obtener las cartas:', err);
+      error: (err) => {
+        console.error('Error al cargar cartas:', err);
         this.loading = false;
       }
     });
@@ -103,23 +103,27 @@ export class CardListComponent implements OnInit, AfterViewInit {
 
   loadSearchCards(): void {
     if (this.loading) return;
-    if (this.currentPage > this.totalPages) return;
+    if (this.currentPage > this.totalPages && this.totalPages !== 1) return;
 
     this.loading = true;
+    console.log(`Solicitando búsqueda página ${this.currentPage}`);
+    
     this.cardService.searchCards(this.searchFilters, this.currentPage, this.limit).subscribe({
       next: res => {
         this.totalPages = res.totalPages;
         // Si no se encontraron cartas y es la primera página, se mostrará el mensaje
         if(this.currentPage === 1 && res.data.length === 0){
-          this.cards = [];
+          this.displayedCards = [];
         } else {
-          this.cards = this.cards.concat(res.data);
+          this.displayedCards = this.displayedCards.concat(res.data);
           this.currentPage++;
         }
         this.loading = false;
         if (this.intersectionObserver && this.scrollTrigger) {
-          this.intersectionObserver.unobserve(this.scrollTrigger.nativeElement);
-          this.intersectionObserver.observe(this.scrollTrigger.nativeElement);
+          setTimeout(() => {
+            this.intersectionObserver.unobserve(this.scrollTrigger.nativeElement);
+            this.intersectionObserver.observe(this.scrollTrigger.nativeElement);
+          }, 100);
         }
       },
       error: err => {
@@ -129,21 +133,21 @@ export class CardListComponent implements OnInit, AfterViewInit {
     });
   }
 
-  // Ahora onSearch recibe un objeto con nombre y filtros
   onSearch(searchData: any): void {
     if (!searchData.name && !Object.values(searchData).some(val => val)) {
       // Se desactiva el modo búsqueda y se restablece la lista original
       this.searchMode = false;
-      this.cards = [];
-      this.currentExpansionIndex = 0;
+      this.displayedCards = [];
       this.currentPage = 1;
-      this.loadCards();
+      
+      // Volvemos a cargar la primera página
+      this.loadMoreCards();
       return;
     }
 
     this.searchMode = true;
     this.searchFilters = { ...searchData };
-    this.cards = [];
+    this.displayedCards = [];
     this.currentPage = 1;
     this.loadSearchCards();
   }
@@ -159,18 +163,18 @@ export class CardListComponent implements OnInit, AfterViewInit {
   }
   
   previousCard(): void {
-    if (!this.selectedCard || this.cards.length === 0) return;
-    const currentIndex = this.cards.findIndex(c => c.id === this.selectedCard!.id);
+    if (!this.selectedCard || this.displayedCards.length === 0) return;
+    const currentIndex = this.displayedCards.findIndex(c => c.id === this.selectedCard!.id);
     if (currentIndex > 0) {
-      this.selectedCard = this.cards[currentIndex - 1];
+      this.selectedCard = this.displayedCards[currentIndex - 1];
     }
   }
 
   nextCard(): void {
-    if (!this.selectedCard || this.cards.length === 0) return;
-    const currentIndex = this.cards.findIndex(c => c.id === this.selectedCard!.id);
-    if (currentIndex >= 0 && currentIndex < this.cards.length - 1) {
-      this.selectedCard = this.cards[currentIndex + 1];
+    if (!this.selectedCard || this.displayedCards.length === 0) return;
+    const currentIndex = this.displayedCards.findIndex(c => c.id === this.selectedCard!.id);
+    if (currentIndex >= 0 && currentIndex < this.displayedCards.length - 1) {
+      this.selectedCard = this.displayedCards[currentIndex + 1];
     }
   }
 }
