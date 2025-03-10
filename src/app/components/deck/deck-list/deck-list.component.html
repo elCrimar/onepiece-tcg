@@ -1,1 +1,25 @@
-<p>deck-list works!</p>
+<app-navbar></app-navbar>
+
+<div class="deck-container">
+  <div class="deck-header">
+    <h1>Mazos populares</h1>
+    <p>Descubre los mazos más utilizados en el meta actual de One Piece TCG</p>
+  </div>
+
+  <div *ngIf="!loading && decks.length === 0" class="no-decks-message">
+    <p>No se encontraron mazos populares</p>
+  </div>
+
+  <div class="decks-grid" *ngIf="decks.length > 0">
+    <div class="deck-card" *ngFor="let deck of decks" [routerLink]="['/mazos', deck.id]">
+      <div class="deck-leader">
+        <img [src]="deck.leader.images" [alt]="deck.leader.name">
+      </div>
+      <div class="deck-info">
+        <h3>{{ deck.name }}</h3>
+        <p class="color"><span [ngClass]="'color-dot ' + deck.leader.color.toLowerCase()"></span>{{ deck.leader.color }}</p>
+        <p class="color"> {{ deck.description }} </p>
+      </div>
+    </div>
+  </div>
+</div>
