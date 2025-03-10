@@ -1,5 +1,7 @@
 .deck-container {
-  margin: 20px 200px;
+  margin: 20px auto;
+  max-width: 1400px; // Ancho máximo para el contenedor
+  padding: 0 20px; // Padding horizontal para evitar que toque los bordes
 }
 
 .deck-header {
@@ -21,8 +23,8 @@
 
 .decks-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); // Columnas automáticas
+  gap: 15px; // Espacio uniforme entre tarjetas
   justify-items: center;
 }
 
@@ -34,8 +36,8 @@
   transition: transform 0.2s, box-shadow 0.2s;
   cursor: pointer;
   width: 100%;
-  max-width: 340px;
-  min-width: 270px;
+  max-width: 280px; // Reducido ligeramente para mejor consistencia
+  min-width: 250px;
   
   &:hover {
     transform: translateY(-5px);
@@ -130,23 +132,20 @@
   background-color: #2d3748;
 }
 
+// Simplificar media queries
 @media (max-width: 1024px) {
   .deck-container {
-    margin: 20px 100px;
-  }
-  
-  .decks-grid {
-    grid-template-columns: repeat(3, 1fr);
+    padding: 0 15px;
   }
 }
 
 @media (max-width: 768px) {
   .deck-container {
-    margin: 20px 40px;
+    padding: 0 10px;
   }
   
-  .decks-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .deck-card {
+    max-width: 260px;
   }
 }
 
@@ -156,6 +155,6 @@
   }
   
   .decks-grid {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: 1fr; // Una sola columna en móviles pequeños
   }
 }
