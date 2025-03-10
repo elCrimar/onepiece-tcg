@@ -1,59 +1,106 @@
 :host {
     display: block;
-    margin: 0 200px; /* Mismo margen horizontal que el search-bar */
+    margin: 0; /* Sin margen en el host */
+}
+
+app-search-bar {
+    display: block;
+    margin: 20px 200px 0; /* Margen horizontal consistente */
 }
 
 .cards-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr); /* Exactamente 6 cartas por fila */
-  gap: 16px;
-  margin: 20px 0; /* Elimino el margen horizontal redundante */
-  justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px;
+    margin: 20px 200px; /* Margen horizontal consistente */
+    justify-content: center;
 }
 
 .card-item {
-  position: relative;
-  aspect-ratio: 5/7; /* Relación de aspecto típica de cartas de TCG (ajustar si es necesario) */
-  background-color: #e3e3e3; /* Color para el placeholder */
-  border-radius: 4.5%;
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-  
-  &:hover {
-    transform: scale(1.02);
-  }
-  
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Asegura que la imagen cubra todo el espacio */
-    display: block;
-  }
+    position: relative;
+    aspect-ratio: 5/7; /* Relación de aspecto típica de cartas de TCG (ajustar si es necesario) */
+    background-color: #e3e3e3; /* Color para el placeholder */
+    border-radius: 4.5%;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    
+    &:hover {
+        transform: scale(1.02);
+    }
+    
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Asegura que la imagen cubra todo el espacio */
+        display: block;
+    }
 }
 
 .no-cards-message {
     text-align: center;
-    font-size: 1.2rem;
-    color: #666;
-    margin: 50px 100px;
+    font-size: 2.2rem; /* Aumentado aún más */
+    font-weight: 600; 
+    color: #8f8f8f;
+    margin: 120px 200px; /* Más margen vertical */
+    padding: 20px;
+    background-color: transparent; /* Sin fondo */
+    border-radius: 8px;
+    
+    .exclamation-icon {
+        display: block;
+        font-size: 5rem; /* Icono grande */
+        color: #6c2215; /* Color rojo para destacar */
+        margin-bottom: 15px; /* Espacio entre icono y texto */
+    }
 }
 
-/* Responsive */
+/* Media queries para responsive */
 @media (max-width: 1024px) {
-  .cards-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
+    .cards-grid {
+        grid-template-columns: repeat(3, 1fr);
+        margin: 20px 100px; /* Ajustar márgenes para pantallas medianas */
+    }
+    
+    app-search-bar {
+        margin: 20px 100px 0;
+    }
+    
+    .no-cards-message {
+        margin: 80px 100px;
+        font-size: 1.8rem;
+    }
 }
 
 @media (max-width: 768px) {
-  .cards-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+    .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+        margin: 20px 40px; /* Márgenes menores en pantallas pequeñas */
+    }
+    
+    app-search-bar {
+        margin: 20px 40px 0;
+    }
+    
+    .no-cards-message {
+        margin: 60px 40px;
+        font-size: 1.6rem;
+    }
 }
 
 @media (max-width: 480px) {
-  .cards-grid {
-    grid-template-columns: repeat(1, 1fr);
-  }
+    .cards-grid {
+        grid-template-columns: repeat(1, 1fr);
+        margin: 20px 20px;
+    }
+    
+    app-search-bar {
+        margin: 20px 20px 0;
+    }
+    
+    .no-cards-message {
+        margin: 40px 20px;
+        font-size: 1.4rem;
+        padding: 20px;
+    }
 }

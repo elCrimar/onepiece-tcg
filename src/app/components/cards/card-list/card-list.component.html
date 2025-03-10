@@ -1,7 +1,10 @@
+<app-navbar></app-navbar>
+
 <app-search-bar (search)="onSearch($event)"></app-search-bar>
 
 <div *ngIf="!loading && displayedCards.length === 0" class="no-cards-message">
-  No se encontró ninguna carta
+  <fa-icon [icon]="faCircleExclamation" class="exclamation-icon"></fa-icon>
+  <div>No se encontró ninguna carta</div>
 </div>
 
 <div class="cards-grid" *ngIf="displayedCards.length > 0">

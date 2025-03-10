@@ -4,15 +4,21 @@ import { CardService } from '../../../services/card.service';
 import { Card } from '../../../models/card';
 import { SearchBarComponent } from '../../search-bar/search-bar.component';
 import { CardDetailComponent } from '../card-detail/card-detail.component';
+import { NavbarComponent } from '../../navbar/navbar.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'; // Añadir esta importación
+import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons'; // Añadir esta importación
 
 @Component({
   selector: 'app-card-list',
   standalone: true,
-  imports: [CommonModule, SearchBarComponent, CardDetailComponent],
+  imports: [CommonModule, SearchBarComponent, CardDetailComponent, NavbarComponent, FontAwesomeModule], // Añadir FontAwesomeModule
   templateUrl: './card-list.component.html',
   styleUrls: ['./card-list.component.scss']
 })
 export class CardListComponent implements OnInit, AfterViewInit {
+  // Añadir el icono
+  faCircleExclamation = faCircleExclamation;
+  
   displayedCards: Card[] = []; // Cartas que se muestran actualmente
   currentPage = 1;
   limit = 36;
