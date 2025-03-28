@@ -1,9 +1,9 @@
 .hero {
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/assets/images/hero-bg.jpg');
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/assets/images/poster.webp');
   background-size: cover;
   background-position: center;
   color: white;
-  padding: 100px 0;
+  padding: 120px 0;
   text-align: center;
   margin: 0 200px;
   border-radius: 8px;
@@ -25,38 +25,6 @@
   }
 }
 
-.hero-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  
-  .btn {
-    padding: 12px 24px;
-    border-radius: 4px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.3s ease;
-  }
-  
-  .btn-primary {
-    background-color: #4064b4;
-    color: white;
-    
-    &:hover {
-      background-color: #335194;
-    }
-  }
-  
-  .btn-secondary {
-    background-color: #333;
-    color: white;
-    
-    &:hover {
-      background-color: #222;
-    }
-  }
-}
-
 .features {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -64,15 +32,37 @@
   margin: 60px 200px;
   
   .feature {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 30px;
     border-radius: 10px;
-    text-align: center;
+    text-align: left;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+    text-decoration: none;
+    color: inherit;
     
     &:hover {
       transform: translateY(-10px);
       box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+    
+    .feature-content {
+      width: 70%;
+      z-index: 2;
+    }
+    
+    .feature-icon {
+      font-size: 6rem;
+      opacity: 0.7;
+      z-index: 1;
+      
+      fa-icon {
+        filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.2));
+      }
     }
     
     &:nth-child(1) {
@@ -95,11 +85,13 @@
       margin-bottom: 15px;
       color: white;
       font-weight: 700;
+      text-align: left;
     }
     
     p {
       color: rgb(244, 244, 244);
       font-size: 1.1rem;
+      text-align: left;
     }
   }
 }
