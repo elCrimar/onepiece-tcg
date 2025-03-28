@@ -21,7 +21,8 @@
       <div class="left-panel">
         <img *ngIf="hoveredCard" 
              [src]="getImageUrl(hoveredCard)" 
-             [alt]="hoveredCard.name || 'Carta'">
+             [alt]="hoveredCard.name || 'Carta'"
+             (click)="openCardDetail(hoveredCard)">
         <img *ngIf="!hoveredCard && deck?.leader" 
              [src]="deck?.leader?.images" 
              [alt]="deck?.leader?.name || 'Líder'">
@@ -35,7 +36,8 @@
             <div class="card-items">
               <div class="card-list-item" *ngFor="let cardEntry of cardGroup.cards"
                    (mouseenter)="setHoveredCard(cardEntry.card)"
-                   (mouseleave)="resetHoveredCard()">
+                   (mouseleave)="resetHoveredCard()"
+                   (click)="openCardDetail(cardEntry.card)">
                 <img [src]="getImageUrl(cardEntry.card)" 
                      [alt]="cardEntry.card.name || 'Carta'">
                 <div class="card-info-row">
@@ -50,3 +52,11 @@
     </div>
   </div>
 </div>
+
+<app-card-detail 
+  *ngIf="showCardDetail && selectedCard" 
+  [card]="selectedCard"
+  (close)="closeCardDetail()"
+  (previous)="goToPreviousCard()"
+  (next)="goToNextCard()">
+</app-card-detail>

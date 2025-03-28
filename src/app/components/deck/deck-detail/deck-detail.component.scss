@@ -16,24 +16,26 @@
 .modal-content {
   position: relative;
   width: 80%;
-  max-height: 90%;
+  max-width: 1100px; // Limitar el ancho máximo
+  max-height: 85vh; // Limitar la altura máxima
   background: #2c2c2c;
   display: flex;
   flex-direction: column;
   border-radius: 15px;
-  overflow-y: auto;
+  overflow: hidden; // Cambiar overflow-y: auto a overflow: hidden
+  color: white;
 }
 
 .close-button {
   position: absolute;
-  top: 15px;
-  right: 15px;
-  width: 50px;
-  height: 50px;
+  top: 8px;
+  right: 8px;
+  width: 36px;
+  height: 36px;
   background-color: transparent;
   border: none;
   color: #b2b2b2;
-  font-size: 34px;
+  font-size: 24px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -50,15 +52,18 @@
 // Header Styles
 .deck-header {
   text-align: center;
-  padding: 1rem;
-  border-bottom: 2px solid #444;
+  padding: 0.5rem 1rem; // Reducir el padding
+  border-bottom: 1px solid #444;
   background-color: #1a1a1a;
-  border-radius: 15px 15px 0 0;
   
   h1 {
-    margin: 0;
-    font-size: 2.2rem;
-    color: #fff;
+    font-size: 1.8rem; // Reducir tamaño de fuente
+    margin: 0.3rem 0; // Reducir márgenes
+  }
+  
+  .deck-subheader {
+    margin: 0.3rem 0; // Reducir márgenes
+    font-size: 0.9rem; // Reducir tamaño de fuente
   }
 }
 
@@ -89,8 +94,10 @@
 
 .modal-body {
   display: flex;
-  padding: 2rem;
-  gap: 2rem;
+  padding: 1rem; // Reducir padding
+  gap: 1.5rem; // Reducir gap
+  overflow: hidden;
+  height: calc(85vh - 80px); // Altura calculada con respecto al header
 }
 
 .left-panel {
@@ -100,23 +107,23 @@
   justify-content: center;
 
   img {
-    max-width: 100%;
-    max-height: 70vh;
+    max-height: 65vh; // Limitar altura de la imagen
+    max-width: 90%; // Evitar que la imagen se salga
     object-fit: contain;
   }
 }
 
 .right-panel {
   flex: 1;
-  color: white;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  height: 70vh;
 }
 
 .cards-list {
-  overflow-y: auto;
+  overflow-y: auto; // Solo la lista tiene scroll
   height: 100%;
+  padding-right: 8px; // Para el scrollbar
 }
 
 .card-info {
@@ -160,24 +167,24 @@
   margin-bottom: 1.5rem;
   
   .card-type-header {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
+    font-size: 1rem; // Más pequeño
+    margin: 8px 0 5px 0; // Reducir márgenes
+    padding-bottom: 3px; // Reducir padding
     color: #ddd;
     border-bottom: 1px solid #444;
-    padding-bottom: 5px;
   }
   
   .card-items {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); // Columnas más pequeñas
+    gap: 8px; // Reducir espacio entre cartas
   }
 }
 
 .card-list-item {
   background-color: #3a3a3a;
   border-radius: 8px;
-  padding: 8px;
+  padding: 5px; // Reducir padding
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
   display: flex;
@@ -198,9 +205,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 3px; // Reducir margen
     
     .card-name {
-      font-size: 0.9rem;
+      font-size: 0.8rem; // Texto más pequeño
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -209,9 +217,9 @@
     }
     
     .card-quantity {
+      font-size: 0.8rem; // Texto más pequeño
       font-weight: bold;
       color: #66aaff;
-      font-size: 0.9rem;
       margin-left: 4px;
     }
   }
@@ -224,6 +232,7 @@
     
     img {
       max-height: 40vh;
+      cursor: pointer;
     }
   }
   

@@ -4,6 +4,7 @@ import { Deck } from '../../../models/deck';
 import { Card } from '../../../models/card';
 import { CardService } from '../../../services/card.service';
 import { lastValueFrom } from 'rxjs';
+import { CardDetailComponent } from '../../cards/card-detail/card-detail.component';
 
 interface CardEntry {
   card: Card;
@@ -18,7 +19,7 @@ interface CardGroup {
 @Component({
   selector: 'app-deck-detail',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, CardDetailComponent],
   templateUrl: './deck-detail.component.html',
   styleUrls: ['./deck-detail.component.scss'],
   encapsulation: ViewEncapsulation.None
@@ -29,6 +30,12 @@ export class DeckDetailComponent implements OnInit {
   
   hoveredCard: Card | null = null;
   groupedCards: CardGroup[] = [];
+  selectedCard: Card | null = null;
+  showCardDetail = false;
+
+  // Añadir estas propiedades para la navegación
+  allCards: Card[] = []; // Lista plana de todas las cartas (sin agrupación)
+  currentCardIndex: number = -1;
   
   constructor(private cardService: CardService) {}
   
@@ -126,6 +133,21 @@ export class DeckDetailComponent implements OnInit {
         return nameA.localeCompare(nameB);
       });
     });
+
+    // Al final del método, después de organizar las cartas
+    this.createFlatCardList();
+  }
+
+  // Método para inicializar la lista plana de cartas
+  createFlatCardList(): void {
+    this.allCards = [];
+    // Crear una lista sin duplicados
+    this.groupedCards.forEach(group => {
+      group.cards.forEach(entry => {
+        // Añadir cada carta solo una vez
+        this.allCards.push(entry.card);
+      });
+    });
   }
   
   getTypeOrder(type: string): number {
@@ -166,5 +188,35 @@ export class DeckDetailComponent implements OnInit {
     
     // Si es un objeto con small y large
     return card.images.large || card.images.small || '';
+  }
+
+  openCardDetail(card: Card): void {
+    // Encontrar el índice de la carta en la lista plana
+    this.currentCardIndex = this.allCards.findIndex(c => c.id === card.id);
+    this.selectedCard = card;
+    this.showCardDetail = true;
+  }
+  
+  closeCardDetail(): void {
+    this.showCardDetail = false;
+    this.selectedCard = null;
+  }
+
+  // Método para navegar a la carta anterior
+  goToPreviousCard(): void {
+    if (this.allCards.length === 0) return;
+    
+    // Reducir el índice y volver al final si es necesario
+    this.currentCardIndex = (this.currentCardIndex - 1 + this.allCards.length) % this.allCards.length;
+    this.selectedCard = this.allCards[this.currentCardIndex];
+  }
+  
+  // Método para navegar a la siguiente carta
+  goToNextCard(): void {
+    if (this.allCards.length === 0) return;
+    
+    // Aumentar el índice y volver al principio si es necesario
+    this.currentCardIndex = (this.currentCardIndex + 1) % this.allCards.length;
+    this.selectedCard = this.allCards[this.currentCardIndex];
   }
 }
