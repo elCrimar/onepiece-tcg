@@ -4,11 +4,12 @@ import { NavbarComponent } from '../../navbar/navbar.component';
 import { DeckService } from '../../../services/deck.service';
 import { Deck } from '../../../models/deck';
 import { RouterModule } from '@angular/router';
+import { DeckDetailComponent } from '../deck-detail/deck-detail.component';
 
 @Component({
   selector: 'app-deck-list',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, RouterModule],
+  imports: [CommonModule, NavbarComponent, RouterModule, DeckDetailComponent],
   templateUrl: './deck-list.component.html',
   styleUrls: ['./deck-list.component.scss']
 })
@@ -17,6 +18,8 @@ export class DeckListComponent implements OnInit {
   currentPage = 1;
   totalPages = 1;
   loading = false;
+  selectedDeck?: Deck;
+  showModal = false;
 
   constructor(private deckService: DeckService) {}
 
@@ -37,5 +40,16 @@ export class DeckListComponent implements OnInit {
         this.loading = false;
       }
     });
+  }
+
+  openDeckDetail(deck: Deck): void {
+    console.log('Abriendo detalle del mazo:', deck);
+    this.selectedDeck = deck;
+    this.showModal = true;
+  }
+
+  closeDeckDetail(): void {
+    this.showModal = false;
+    this.selectedDeck = undefined;
   }
 }

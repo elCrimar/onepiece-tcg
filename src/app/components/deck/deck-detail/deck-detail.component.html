@@ -1,0 +1,52 @@
+<div class="modal-background" tabindex="0" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <!-- Botón de cierre -->
+    <button class="close-button" (click)="closeModal()">×</button>
+    
+    <!-- Header section -->
+    <div class="deck-header">
+      <h1>{{ deck?.name }}</h1>
+      <div class="deck-subheader">
+        <span>
+          <span class="color-dot" [ngClass]="deck?.leader?.color?.toLowerCase()"></span>
+          {{ deck?.leader?.color }}
+        </span> | 
+        <span>{{ deck?.total_cards }} cartas</span>
+      </div>
+    </div>
+    
+    <!-- Body section -->
+    <div class="modal-body">
+      <!-- Carta ampliada (izquierda) -->
+      <div class="left-panel">
+        <img *ngIf="hoveredCard" 
+             [src]="getImageUrl(hoveredCard)" 
+             [alt]="hoveredCard.name || 'Carta'">
+        <img *ngIf="!hoveredCard && deck?.leader" 
+             [src]="deck?.leader?.images" 
+             [alt]="deck?.leader?.name || 'Líder'">
+      </div>
+      
+      <!-- Lista de cartas (derecha) -->
+      <div class="right-panel">
+        <div class="cards-list">
+          <div class="card-group" *ngFor="let cardGroup of groupedCards">
+            <h3 class="card-type-header">{{ cardGroup.type }} ({{ getTotalInGroup(cardGroup) }})</h3>
+            <div class="card-items">
+              <div class="card-list-item" *ngFor="let cardEntry of cardGroup.cards"
+                   (mouseenter)="setHoveredCard(cardEntry.card)"
+                   (mouseleave)="resetHoveredCard()">
+                <img [src]="getImageUrl(cardEntry.card)" 
+                     [alt]="cardEntry.card.name || 'Carta'">
+                <div class="card-info-row">
+                  <div class="card-name">{{ cardEntry.card.name || 'Carta sin nombre' }}</div>
+                  <div class="card-quantity">x{{ cardEntry.quantity }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

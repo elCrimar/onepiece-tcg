@@ -20,6 +20,13 @@ export class CardService {
     );
   }
 
+  // Método para obtener una carta específica por Code
+  getCardByCode(code: string): Observable<Card> {
+    return this.apiService.get<any>(`cards/${code}`).pipe(
+      map(response => response.data)
+    );
+  }
+
   // Buscar cartas por nombre con filtros y paginación
   searchCards(filters: any, page: number, limit: number): Observable<{ totalPages: number; data: Card[] }> {
     return this.apiService.get<any>('cards', { ...filters, page, limit }).pipe(

@@ -3,7 +3,6 @@
 <div class="deck-container">
   <div class="deck-header">
     <h1>Mazos populares</h1>
-    <p>Descubre los mazos más utilizados en el meta actual de One Piece TCG</p>
   </div>
 
   <div *ngIf="!loading && decks.length === 0" class="no-decks-message">
@@ -11,7 +10,7 @@
   </div>
 
   <div class="decks-grid" *ngIf="decks.length > 0">
-    <div class="deck-card" *ngFor="let deck of decks" [routerLink]="['/mazos', deck.id]">
+    <div class="deck-card" *ngFor="let deck of decks" (click)="openDeckDetail(deck)">
       <div class="deck-leader">
         <img [src]="deck.leader.images" [alt]="deck.leader.name">
       </div>
@@ -23,3 +22,10 @@
     </div>
   </div>
 </div>
+
+<!-- Añadir el componente del modal de detalle -->
+<app-deck-detail 
+  *ngIf="showModal && selectedDeck" 
+  [deck]="selectedDeck" 
+  (close)="closeDeckDetail()">
+</app-deck-detail>
