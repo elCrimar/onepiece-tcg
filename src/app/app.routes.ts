@@ -7,7 +7,7 @@ import { HomeComponent } from './home/home.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'cartas', component: CardListComponent },
+  { path: 'cards', component: CardListComponent },
   { path: 'decks', component: DeckListComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
