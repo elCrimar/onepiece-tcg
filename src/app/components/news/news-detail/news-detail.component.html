@@ -1,0 +1,40 @@
+<app-navbar></app-navbar>
+
+<div class="news-detail-container">
+  <div *ngIf="loading" class="loading-spinner">
+    <span>Cargando noticia...</span>
+  </div>
+
+  <div *ngIf="!loading && error" class="error-message">
+    <p>Ocurrió un error al cargar la noticia. Por favor, intenta nuevamente más tarde.</p>
+    <button class="back-button" (click)="goBack()">Volver a noticias</button>
+  </div>
+
+  <div *ngIf="!loading && !error && !news" class="not-found-message">
+    <p>La noticia solicitada no existe o ha sido eliminada.</p>
+    <button class="back-button" (click)="goBack()">Volver a noticias</button>
+  </div>
+
+  <article class="news-detail" *ngIf="!loading && !error && news">
+    <button class="back-button" (click)="goBack()">← Volver a noticias</button>
+    
+    <header class="news-header">
+      <h1>{{ news.title }}</h1>
+      <div class="news-meta">
+        <span class="news-date">{{ news.created_at | date:'dd/MM/yyyy' }}</span>
+        <span class="news-author">Por: {{ news.author }}</span>
+        <span *ngIf="news.category" class="news-category">{{ news.category }}</span>
+      </div>
+    </header>
+    
+    <div class="news-image" *ngIf="news.image">
+      <img [src]="news.image" [alt]="news.title">
+    </div>
+
+    <div class="news-content" [innerHTML]="getSafeHtml(news.content)"></div>
+    
+    <div class="news-tags" *ngIf="news.tags && news.tags.length > 0">
+      <span *ngFor="let tag of news.tags" class="tag">{{ tag }}</span>
+    </div>
+  </article>
+</div>

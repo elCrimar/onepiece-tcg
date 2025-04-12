@@ -1,0 +1,43 @@
+<app-navbar></app-navbar>
+
+<div class="news-container">
+  <div class="news-header">
+    <h1>Últimas Noticias</h1>
+  </div>
+
+  <div *ngIf="loading" class="loading-spinner">
+    <span>Cargando noticias...</span>
+  </div>
+
+  <div *ngIf="!loading && error" class="error-message">
+    <p>Ocurrió un error al cargar las noticias. Por favor, intenta nuevamente más tarde.</p>
+  </div>
+
+  <div *ngIf="!loading && !error && news.length === 0" class="no-news-message">
+    <p>No hay noticias disponibles en este momento.</p>
+  </div>
+
+  <div class="news-list" *ngIf="!loading && !error && news.length > 0">
+    <div class="news-card" *ngFor="let item of news" [routerLink]="['/news', item.id]">
+      <div class="news-image" *ngIf="item.image">
+        <img [src]="item.image" [alt]="item.title">
+      </div>
+      <div class="news-content">
+        <div class="news-date">{{ item.created_at | date:'dd/MM/yyyy' }}</div>
+        <h2 class="news-title">{{ item.title }}</h2>
+        <p class="news-excerpt" [innerHTML]="getExcerpt(item.content)"></p>
+        <div class="news-footer">
+          <span class="news-author">Por: {{ item.author }}</span>
+          <span *ngIf="item.category" class="news-category">{{ item.category }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Paginación -->
+  <div class="pagination" *ngIf="totalPages > 1">
+    <button [disabled]="currentPage === 1" (click)="goToPage(currentPage - 1)">Anterior</button>
+    <span>Página {{ currentPage }} de {{ totalPages }}</span>
+    <button [disabled]="currentPage === totalPages" (click)="goToPage(currentPage + 1)">Siguiente</button>
+  </div>
+</div>
