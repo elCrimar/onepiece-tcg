@@ -21,6 +21,13 @@
       </a>
     </div>
 
+    <!-- Nuevo contenedor para el botón de inicio de sesión -->
+    <div class="login-container">
+      <a routerLink="/login" class="login-button">
+        <fa-icon [icon]="faUser" class="icon"></fa-icon> Iniciar sesión
+      </a>
+    </div>
+
     <button class="mobile-menu-btn" (click)="toggleMobileMenu()">
       <span></span>
       <span></span>
@@ -42,5 +49,9 @@
   </a>
   <a routerLink="/news" routerLinkActive="active" (click)="closeMobileMenu()">
     <fa-icon [icon]="faNewspaper" class="icon"></fa-icon> Noticias
+  </a>
+  <!-- Añadir enlace de inicio de sesión al menú móvil -->
+  <a routerLink="/login" class="login-link-mobile" (click)="closeMobileMenu()">
+    <fa-icon [icon]="faUser" class="icon"></fa-icon> Iniciar sesión
   </a>
 </div>

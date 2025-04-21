@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faHome, faBook, faLayerGroup, faNewspaper } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faBook, faLayerGroup, faNewspaper, faUser } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-navbar',
@@ -16,6 +16,7 @@ export class NavbarComponent {
   faBook = faBook;
   faLayerGroup = faLayerGroup;
   faNewspaper = faNewspaper;
+  faUser = faUser;
   
   isMobileMenuOpen = false;
   
