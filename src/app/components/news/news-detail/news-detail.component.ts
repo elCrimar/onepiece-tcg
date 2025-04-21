@@ -44,8 +44,6 @@ export class NewsDetailComponent implements OnInit {
     this.newsService.getNewsById(id)
       .subscribe({
         next: (news) => {
-          console.log('Noticia completa recibida:', news); // Log de todo el objeto
-          console.log('Propiedades de la noticia:', Object.keys(news)); // Ver propiedades
           this.news = news;
           
           // Verificación adicional y corrección en caso necesario

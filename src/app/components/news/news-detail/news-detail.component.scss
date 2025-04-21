@@ -23,7 +23,7 @@
   cursor: pointer;
   transition: background-color 0.2s;
   margin-top: 1rem;
-  margin-bottom: 1.5rem; // Agregar margen inferior
+  margin-bottom: 1.5rem;
   align-self: flex-start;
   
   &:hover {
@@ -37,6 +37,7 @@
   overflow: hidden;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   color: #fff;
+  max-width: 100%;
   
   .news-header {
     padding: 2rem;
@@ -75,9 +76,11 @@
   
   .news-content {
     display: block;
-    width: 100%;
-    padding: 2rem; // Aumentar el padding para mejor espaciado
-    color: #fff; // Asegúrate que el texto sea visible
+    width: calc(100% - 4rem);
+    padding: 2rem;
+    color: #fff;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
     
     h2 {
       font-size: 1.5rem;
@@ -90,7 +93,6 @@
       line-height: 1.6;
     }
     
-    /* Estilos para elementos HTML dentro del contenido */
     h1, h3, h4, h5, h6 {
       margin-top: 1.5rem;
       margin-bottom: 1rem;
@@ -118,8 +120,9 @@
     img {
       max-width: 100%;
       height: auto;
-      margin: 1rem 0;
+      margin: 1rem auto;
       border-radius: 5px;
+      display: block;
     }
     
     blockquote {
