@@ -6,7 +6,7 @@
 <div class="filters">
   <!-- Rarity -->
   <div class="filter">
-    <label>Rarity:</label>
+    <label>Rareza:</label>
     <select [(ngModel)]="filters.rarity">
       <option value="">Todas</option>
       <option value="C">Common</option>
@@ -21,7 +21,7 @@
 
   <!-- Type -->
   <div class="filter">
-    <label>Type:</label>
+    <label>Tipo:</label>
     <select [(ngModel)]="filters.type">
       <option value="">Todos</option>
       <option value="LEADER">LEADER</option>
@@ -32,7 +32,7 @@
 
   <!-- Cost como Select -->
   <div class="filter">
-    <label>Cost:</label>
+    <label>Coste:</label>
     <select [(ngModel)]="filters.cost">
       <option value="">Todos</option>
       <option value="0">0</option>
@@ -51,7 +51,7 @@
 
   <!-- Power como Select -->
   <div class="filter">
-    <label>Power:</label>
+    <label>Poder:</label>
     <select [(ngModel)]="filters.power">
       <option value="">Todos</option>
       <option value="0">0</option>
@@ -157,6 +157,6 @@
         </optgroup>
       </select>
     </div>
-    <button class="reset-button" (click)="resetFilters()">Reset Filters</button>
+    <button class="reset-button" (click)="resetFilters()">Borrar Filtros</button>
   </div>
 </div>
