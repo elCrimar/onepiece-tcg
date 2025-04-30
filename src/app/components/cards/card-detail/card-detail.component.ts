@@ -36,7 +36,7 @@ export class CardDetailComponent implements AfterViewInit {
     .replace('[Main]', '<span class="blue-badge">Main</span>')
     .replace("[On Your Opponent's Attack]", '<span class="blue-badge">On Your Opponent\'s Attack</span>')
     .replace("[On Block]", '<span class="blue-badge">On Block</span>')
-    .replace('[DON!! x1]', '<span class="black-badge">DON!! x1</span>')
+    .replace('[DON!!x1]', '<span class="black-badge">DON!!x1</span>')
     .replace('[DON!! x2]', '<span class="black-badge">DON!! x2</span>')
     .replace('[DON!! x3]', '<span class="black-badge">DON!! x3</span>')
     .replace('[Once Per Turn]', '<span class="red-badge">Once Per Turn</span>')
