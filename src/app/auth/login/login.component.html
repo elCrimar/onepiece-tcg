@@ -1,0 +1,65 @@
+<div class="login-container">
+  <!-- Login Form -->
+  <form *ngIf="isLoginView" [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()" class="login-form">
+    <h2>Iniciar Sesión</h2>
+
+    <div class="form-group">
+      <label for="login-username">Usuario:</label>
+      <input id="login-username" type="text" formControlName="username" required>
+      <div *ngIf="loginForm.get('username')?.invalid && (loginForm.get('username')?.dirty || loginForm.get('username')?.touched)" class="error-message">
+        <small *ngIf="loginForm.get('username')?.errors?.['required']">El usuario es obligatorio.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="login-password">Contraseña:</label>
+      <input id="login-password" type="password" formControlName="password" required>
+      <div *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)" class="error-message">
+        <small *ngIf="loginForm.get('password')?.errors?.['required']">La contraseña es obligatoria.</small>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-login" [disabled]="loginForm.invalid">Iniciar Sesión</button>
+    <button type="button" class="btn btn-toggle" (click)="toggleView()">¿No tienes cuenta? Regístrate</button>
+  </form>
+
+  <!-- Registration Form -->
+  <form *ngIf="!isLoginView" [formGroup]="registerForm" (ngSubmit)="onRegisterSubmit()" class="register-form">
+    <h2>Registrarse</h2>
+
+    <div class="form-group">
+      <label for="register-username">Usuario:</label>
+      <input id="register-username" type="text" formControlName="username" required>
+       <div *ngIf="registerForm.get('username')?.invalid && (registerForm.get('username')?.dirty || registerForm.get('username')?.touched)" class="error-message">
+        <small *ngIf="registerForm.get('username')?.errors?.['required']">El usuario es obligatorio.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="register-password">Contraseña:</label>
+      <input id="register-password" type="password" formControlName="password" required>
+      <div *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)" class="error-message">
+        <small *ngIf="registerForm.get('password')?.errors?.['required']">La contraseña es obligatoria.</small>
+        <small *ngIf="registerForm.get('password')?.errors?.['minlength']">La contraseña debe tener al menos 6 caracteres.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="register-repeat-password">Repetir Contraseña:</label>
+      <input id="register-repeat-password" type="password" formControlName="repeatPassword" required>
+      <div *ngIf="registerForm.get('repeatPassword')?.invalid && (registerForm.get('repeatPassword')?.dirty || registerForm.get('repeatPassword')?.touched)" class="error-message">
+         <small *ngIf="registerForm.get('repeatPassword')?.errors?.['required']">Repetir la contraseña es obligatorio.</small>
+      </div>
+       <!-- Show password mismatch error at the form level or specifically on repeatPassword -->
+      <div *ngIf="registerForm.errors?.['passwordsMismatch'] && (registerForm.get('repeatPassword')?.dirty || registerForm.get('repeatPassword')?.touched)" class="error-message">
+        <small>Las contraseñas no coinciden.</small>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-register" [disabled]="registerForm.invalid">Registrarse</button>
+    <button type="button" class="btn btn-toggle" (click)="toggleView()">¿Ya tienes cuenta? Inicia Sesión</button>
+  </form>
+
+  <!-- Link to Home -->
+  <a routerLink="/" class="back-to-home-link">← Volver al Inicio</a>
+</div>
