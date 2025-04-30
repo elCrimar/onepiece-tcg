@@ -114,8 +114,17 @@ input.ng-invalid.ng-touched {
   margin-top: 20px;
   color: #007bff;
   text-decoration: none;
+  background-color: white;
+  padding: 10px 15px;
+  border: 1px solid #007bff;
+  border-radius: 4px;
+  max-width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
 
   &:hover {
-    text-decoration: underline;
+    background-color: #d9dadb;
   }
 }
