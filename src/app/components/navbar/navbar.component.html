@@ -21,11 +21,26 @@
       </a>
     </div>
 
-    <!-- Nuevo contenedor para el botón de inicio de sesión -->
-    <div class="login-container">
-      <a routerLink="/login" class="login-button">
-        <fa-icon [icon]="faUser" class="icon"></fa-icon> Iniciar sesión
-      </a>
+    <!-- Contenedor de autenticación -->
+    <div class="auth-container">
+      <!-- Mostrar si NO está autenticado -->
+      <ng-container *ngIf="!isAuthenticated()">
+        <div class="login-container">
+          <a routerLink="/login" class="login-button">
+            <fa-icon [icon]="faUser" class="icon"></fa-icon> Iniciar sesión
+          </a>
+        </div>
+      </ng-container>
+
+      <!-- Mostrar si ESTÁ autenticado -->
+      <ng-container *ngIf="isAuthenticated()">
+        <div class="user-info-container">
+          <span class="username-display">{{ username() }}</span>
+          <button class="login-button logout-button" (click)="logout()">
+            <fa-icon [icon]="faXmark" class="icon"></fa-icon> Cerrar Sesión
+          </button>
+        </div>
+      </ng-container>
     </div>
 
     <button class="mobile-menu-btn" (click)="toggleMobileMenu()">
@@ -50,8 +65,18 @@
   <a routerLink="/news" routerLinkActive="active" (click)="closeMobileMenu()">
     <fa-icon [icon]="faNewspaper" class="icon"></fa-icon> Noticias
   </a>
-  <!-- Añadir enlace de inicio de sesión al menú móvil -->
-  <a routerLink="/login" class="login-link-mobile" (click)="closeMobileMenu()">
-    <fa-icon [icon]="faUser" class="icon"></fa-icon> Iniciar sesión
-  </a>
+  <!-- Autenticación en menú móvil -->
+  <ng-container *ngIf="!isAuthenticated()">
+    <a routerLink="/login" class="login-link-mobile" (click)="closeMobileMenu()">
+      <fa-icon [icon]="faUser" class="icon"></fa-icon> Iniciar sesión
+    </a>
+  </ng-container>
+  <ng-container *ngIf="isAuthenticated()">
+     <div class="user-info-mobile">
+        <span class="username-mobile">{{ username() }}</span>
+        <a class="logout-link-mobile" (click)="logout(); closeMobileMenu()">
+          <fa-icon [icon]="faXmark" class="icon"></fa-icon> Cerrar Sesión
+        </a>
+     </div>
+  </ng-container>
 </div>
